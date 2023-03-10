@@ -34,7 +34,11 @@ public class HealthClubController {
 
     @PostMapping("/addLocation")
     public String addLocation(@RequestBody Location l){
-        loc.save(l);
+        if(l.getLocationName().length()==0 || l.getAddress().length()==0)
+            return "Please give all values";
+        Location locAdded = loc.save(l);
+        if(locAdded == null)
+            return "Failed";
         return "Added Successfully";
     }
 
@@ -45,13 +49,23 @@ public class HealthClubController {
 
     @DeleteMapping("/deleteLocation/{id}")
     public String deleteLocationById(@PathVariable String id){
+        if(findLocationByID(id)==null)
+            return "Invalid entry";
         loc.deleteById(id);
         return "Deleted Successfully";
     }
 
     @GetMapping("/findLocation/{id}")
-    public Optional<Location> findLocationByID(@PathVariable String id){
-        return loc.findById(id);
+    public Location findLocationByID(@PathVariable String id){
+        Location location = null;
+        if(loc.findById(id)!=null)
+            location = loc.findById(id).get();
+        return location;
     }
+
+//    @DeleteMapping("/locationDeleteAll")
+//    public void deleteAllLocation(){
+//        loc.deleteAll();
+//    }
 
 }

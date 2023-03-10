@@ -9,10 +9,12 @@ public class Location {
     @Id
     private String locationID;
     private String address;
+    private String locationName;
 
-    public Location(String locationID, String address){
+    public Location(String locationID, String address, String locationName){
         this.locationID = locationID;
         this.address = address;
+        this.locationName = locationName;
     }
 
     public void setLocationID(String locationID){
@@ -21,6 +23,14 @@ public class Location {
 
     public String getLocationID(){
         return locationID;
+    }
+
+    public void setName(String locationID){
+        this.locationName = locationName;
+    }
+
+    public String getLocationName(){
+        return locationName;
     }
 
     public void setAddress(String address){
