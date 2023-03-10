@@ -20,7 +20,6 @@ public class LoginRepo implements LoginRepository{
 
     public String addUser(String uName,String pass,String uType) {
 
-
         loginRepository.save(new Login("ujwalabalbhim.mote@sjsu.edu", "admin", "M"));
 
         loginRepository.findAll().forEach(item -> System.out.println(getItemDetails(item)));
