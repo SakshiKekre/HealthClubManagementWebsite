@@ -56,16 +56,11 @@ public class HealthClubController {
     }
 
     @GetMapping("/findLocation/{id}")
-    public Location findLocationByID(@PathVariable String id){
+    public Location findLocationByID(@PathVariable String id) {
         Location location = null;
-        if(loc.findById(id)!=null)
+        if (loc.findById(id) != null)
             location = loc.findById(id).get();
         return location;
     }
-
-//    @DeleteMapping("/locationDeleteAll")
-//    public void deleteAllLocation(){
-//        loc.deleteAll();
-//    }
 
 }
