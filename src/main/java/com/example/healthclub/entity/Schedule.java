@@ -15,6 +15,7 @@ public class Schedule {
     private String timeSlot;
     @Getter@Setter
     private String classs;
+    //should be int type right
     @Getter@Setter
     private String capacity;
     @Getter@Setter
