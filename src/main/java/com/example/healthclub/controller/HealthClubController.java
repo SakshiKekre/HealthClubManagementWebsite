@@ -1,17 +1,18 @@
 package com.example.healthclub.controller;
 
-import com.example.healthclub.entity.Location;
+import com.example.healthclub.entity.Membership;
+import com.example.healthclub.entity.Registration;
+import com.example.healthclub.entity.Schedule;
 import com.example.healthclub.repository.LoginRepo;
-import com.example.healthclub.service.LocationRepository;
-import com.example.healthclub.service.LoginRepository;
+import com.example.healthclub.repository.MembershipRepository;
+import com.example.healthclub.repository.RegistrationRepository;
+import com.example.healthclub.repository.ScheduleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/healthclub")
@@ -20,47 +21,81 @@ public class HealthClubController {
 
     @Autowired
     LoginRepo loginRepo;
+    @Autowired
+    MembershipRepository membershipRepository;
+    @Autowired
+    RegistrationRepository registrationRepository;
+    @Autowired
+    ScheduleRepository scheduleRepository;
 
     @GetMapping("/getHealthOfApp")
-    public ResponseEntity<String> getData() {
+    public ResponseEntity<String> verifyUser() {
         System.out.println("fffff");
 
         loginRepo.addUser("","","");
         return new ResponseEntity<>("app is up and running", HttpStatus.OK);
     }
 
-    @Autowired
-    LocationRepository loc;
+    @PostMapping("/addMembership")
+    public String addMembership(@RequestBody Membership m) {
+        System.out.println("in add membership");
+        if(m!=null) {
+            membershipRepository.addMembership(m);
+            return "membership added";
+        }
+        else {
+            return "Please enter valid data";
+        }
 
-    @PostMapping("/addLocation")
-    public String addLocation(@RequestBody Location l){
-        if(l.getLocationName().length()==0 || l.getAddress().length()==0)
-            return "Please give all values";
-        Location locAdded = loc.save(l);
-        if(locAdded == null)
-            return "Failed";
-        return "Added Successfully";
+
+    }
+    @DeleteMapping("/deleteMembership/{type}")
+    public String deleteMemberShip(@PathVariable String type) {
+        System.out.println("in delete membership");
+        if(type!=null) {
+            membershipRepository.deleteMembership(type);
+            return type + " deleted";
+        }
+        else {
+            return "Please enter membership type to be deleted";
+        }
     }
 
-    @GetMapping("/findAllLocations")
-    public List<Location> findAllLocations() {
-        return loc.findAll();
+
+    @GetMapping("getMembershipData")
+    public List<Membership> getMembershipData() {
+       return membershipRepository.getMembershipData();
     }
 
-    @DeleteMapping("/deleteLocation/{id}")
-    public String deleteLocationById(@PathVariable String id){
-        if(findLocationByID(id)==null)
-            return "Invalid entry";
-        loc.deleteById(id);
-        return "Deleted Successfully";
+   @PostMapping("/doRegister")
+    public String doRegister(@RequestBody Registration r) {
+        if(r!=null) {
+            registrationRepository.doRegister(r);
+            return r.getUserName();
+        }
+        else {
+            return "registration failed try after some time";
+        }
     }
 
-    @GetMapping("/findLocation/{id}")
-    public Location findLocationByID(@PathVariable String id) {
-        Location location = null;
-        if (loc.findById(id) != null)
-            location = loc.findById(id).get();
-        return location;
+    @DeleteMapping("/deleteRegistration/{regNumber}")
+    public String deleteRegistration(@PathVariable String regNumber) {
+        if(regNumber!=null && !regNumber.isEmpty()) {
+            registrationRepository.deleteRegister(regNumber);
+            return regNumber + "deleted successfully";
+        }
+        else {
+            return "Can't delete registration for now please try after some time";
+        }
+    }
+
+
+
+
+
+    @GetMapping("getAllScheduleData")
+    public List<Schedule> getAllScheduleData() {
+        return scheduleRepository.getAllSchedule();
     }
 
 }

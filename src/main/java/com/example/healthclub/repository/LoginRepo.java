@@ -1,7 +1,7 @@
 package com.example.healthclub.repository;
 
 import com.example.healthclub.entity.Login;
-import com.example.healthclub.service.LoginRepository;
+import com.example.healthclub.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
@@ -14,15 +14,16 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 @Repository
-public class LoginRepo implements LoginRepository{
+public class LoginRepo implements LoginService {
     @Autowired
-    LoginRepository loginRepository;
+    LoginService loginService;
 
     public String addUser(String uName,String pass,String uType) {
 
-        loginRepository.save(new Login("ujwalabalbhim.mote@sjsu.edu", "admin", "M"));
 
-        loginRepository.findAll().forEach(item -> System.out.println(getItemDetails(item)));
+        loginService.save(new Login("ujwalabalbhim.mote@sjsu.edu", "admin", "M"));
+
+        loginService.findAll().forEach(item -> System.out.println(getItemDetails(item)));
 
         return " ";
 
