@@ -1,5 +1,6 @@
 package com.example.healthclub.entity;
 
+import lombok.Getter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -8,6 +9,7 @@ public class Login {
 
     @Id
     private String userName;
+    @Getter
     private String password;
     private String userType;
 

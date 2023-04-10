@@ -89,7 +89,27 @@ public class HealthClubController {
         }
     }
 
+    @PostMapping("addSchedule")
+    public String addSchedule(@RequestBody Schedule s) {
+        if(s!=null) {
+            scheduleRepository.addSchedule(s);
+            return "schedule added successfully";
+        }
+        else {
+            return "failed to add schedule due to data validation error";
+        }
+    }
 
+    @DeleteMapping("/deleteSchedule/{id}")
+    public String deleteSchedule(@PathVariable String id) {
+        if(id!=null) {
+            scheduleRepository.deleteSchedule(id);
+            return "schedule deleted successfully";
+        }
+        else {
+            return "delete schedule failed due to data validation error";
+        }
+    }
 
 
 
