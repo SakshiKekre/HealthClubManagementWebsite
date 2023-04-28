@@ -18,5 +18,9 @@ public class Activity {
     private Date activityStartTime;
     @Getter@Setter
     private Date activityEndTime;
+   /* @Getter@Setter
+    private Location location;*/
+    @Getter@Setter
+    private String equipment;
 
 }

@@ -1,5 +1,6 @@
 package com.example.healthclub.controller;
 
+
 import ch.qos.logback.core.encoder.EchoEncoder;
 import com.example.healthclub.entity.*;
 import com.example.healthclub.repository.LoginRepo;
@@ -8,6 +9,13 @@ import com.example.healthclub.repository.RegistrationRepository;
 import com.example.healthclub.repository.ScheduleRepository;
 import com.example.healthclub.service.EquipmentRepository;
 import com.example.healthclub.service.GymRepository;
+
+import com.example.healthclub.entity.Location;
+import com.example.healthclub.entity.Membership;
+import com.example.healthclub.entity.Registration;
+import com.example.healthclub.entity.Schedule;
+import com.example.healthclub.repository.*;
+
 import com.example.healthclub.service.LocationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,6 +43,9 @@ public class HealthClubController {
     GymRepository gymRepository;
     @Autowired
     EquipmentRepository equipmentRepository;
+
+    @Autowired
+    EmployeeRepository employeeRepository;
 
     @GetMapping("/getHealthOfApp")
     public ResponseEntity<String> verifyUser() {
@@ -152,6 +163,7 @@ public class HealthClubController {
         return loc.findById(id);
     }
 
+
     @GetMapping("/fetchGymInfo")
     public List<Gym> fetchGymInfo(){
         return gymRepository.findAll();
@@ -202,6 +214,19 @@ public class HealthClubController {
         return equipmentRepository.findAllByLocationLocationName(decodedParam);
     }
 
+
+
+
+    @GetMapping("/checkinMember")
+    public String checkinMember(@RequestBody Registration registration, String checkinTime) {
+        employeeRepository.checkinMember(registration,checkinTime);
+        return "checkin time update success";
+    }
+    @GetMapping("/checkoutMember")
+    public String checkoutMember(@RequestBody Registration registration, String checkinTime) {
+        employeeRepository.checkoutMember(registration,checkinTime);
+        return "checkout time update success";
+    }
 
 
 }

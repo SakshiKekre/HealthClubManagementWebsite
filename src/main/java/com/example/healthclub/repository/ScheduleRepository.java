@@ -22,4 +22,6 @@ public class ScheduleRepository {
     public List<Schedule> getAllSchedule() {
         return scheduleService.findAll();
     }
+
+    //class search by location
 }

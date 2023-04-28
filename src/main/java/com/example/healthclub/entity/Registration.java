@@ -46,9 +46,16 @@ public class Registration {
     private String userName; // to fetch data after registration
     @Getter
     @Setter
-    private String classsSchedule;
+    private Schedule classsSchedule;
     @Getter@Setter
     private String membershipType;
+    @Getter@Setter
+    private String checkinTime;
+    @Getter@Setter
+    private String checkoutTime;
+    @Getter@Setter
+    private Activity activity;
+
 
 
 
