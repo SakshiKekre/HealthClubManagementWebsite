@@ -19,5 +19,4 @@ public class Activity {
     @Getter@Setter
     private Date activityEndTime;
 
-
 }
