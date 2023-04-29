@@ -58,7 +58,7 @@ public class MembershipRepository   {
         //registration.setCheckinTime(checkinTime);
 //        Query query = new Query(Criteria.where("membershipStartDate").lte("2024-10-10").gte("2020-10-10"));
         try {
-            LocalDate startDate = LocalDate.of(2020, Month.OCTOBER, 10);
+            LocalDate startDate = LocalDate.of(2020, Month.OCTOBER, 11);
             LocalDate endDate = LocalDate.of(2024, Month.OCTOBER, 10);
             Criteria criteria = new Criteria().andOperator(
 //                    where("warehouse").is(warehouse),
