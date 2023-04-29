@@ -20,22 +20,8 @@ public class Membership {
     @Getter
     @Setter
     private String membershipFees;
-    @Getter
-    @Setter
-    private String validity;// month,day or year
-
     @Getter@Setter
-    private String memberId;
-    @Getter@Setter
-    private Membership membership;
-    @Getter@Setter
-    private String membershipLastDay;
-    @Getter
-    @Setter
-    private Boolean enrolled;
-    @Getter
-    @Setter
-    private Activity activity;
+    private String validity;
 
 
 }

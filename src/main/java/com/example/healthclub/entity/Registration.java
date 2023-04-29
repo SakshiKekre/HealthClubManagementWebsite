@@ -5,11 +5,14 @@ import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Date;
+
 @Document("registration")
 public class Registration {
     @Id
     @Getter
     @Setter
+    //memberId
     private String registrationNumber;
     @Getter
     @Setter
@@ -41,14 +44,14 @@ public class Registration {
     @Getter
     @Setter
     private String branch;
-    @Getter
-    @Setter
-    private String userName; // to fetch data after registration
+//    @Getter
+//    @Setter
+//    private String userName; // to fetch data after registration
     @Getter
     @Setter
     private Schedule classsSchedule;
     @Getter@Setter
-    private String membershipType;
+    private Membership membershipType;
     @Getter@Setter
     private String checkinTime;
     @Getter@Setter
@@ -56,7 +59,17 @@ public class Registration {
     @Getter@Setter
     private Activity activity;
 
-
+    @Getter
+    @Setter
+    private String validity;// month,day or year
+    @Getter@Setter
+    private Membership membership;
+    @Getter@Setter
+    private Date membershipStartDate;
+    @Getter
+    @Setter
+    //trial or member
+    private Boolean enrolled;
 
 
 }

@@ -18,6 +18,8 @@ import com.example.healthclub.repository.*;
 
 import com.example.healthclub.service.LocationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.configurationprocessor.json.JSONArray;
+import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -90,11 +92,16 @@ public class HealthClubController {
     public String doRegister(@RequestBody Registration r) {
         if(r!=null) {
             registrationRepository.doRegister(r);
-            return r.getUserName();
+            return r.getRegistrationNumber();
         }
         else {
             return "registration failed try after some time";
         }
+    }
+
+    @GetMapping("/fetchAllMembers")
+    public List<Registration> fetchAllMembers(){
+        return registrationRepository.fetchAllMembers();
     }
 
     @DeleteMapping("/deleteRegistration/{regNumber}")
@@ -226,6 +233,13 @@ public class HealthClubController {
     public String checkoutMember(@RequestBody Registration registration, String checkinTime) {
         employeeRepository.checkoutMember(registration,checkinTime);
         return "checkout time update success";
+    }
+
+    //analytics
+    //Classes and enrollment by day/week
+    @GetMapping("/classEnrollAnalytics")
+    public List<WeekOutput> classEnroll(){
+        return membershipRepository.fetchYearAnalytics();
     }
 
 

@@ -5,6 +5,8 @@ import com.example.healthclub.service.RegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class RegistrationRepository{
     @Autowired
@@ -16,5 +18,11 @@ public class RegistrationRepository{
     public void deleteRegister(String regNumber) {
         registrationService.deleteById(regNumber);
     }
+
+    public List<Registration> fetchAllMembers() {
+        return registrationService.findAll();
+    }
+
+
 
 }
