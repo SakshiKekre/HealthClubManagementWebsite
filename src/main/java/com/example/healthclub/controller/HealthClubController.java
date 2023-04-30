@@ -23,9 +23,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URLDecoder;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 @RestController
 @RequestMapping("/healthclub")
@@ -238,17 +243,39 @@ public class HealthClubController {
     //Classes and enrollment by day/week
     @Autowired
     RegistrationService registrationService;
+//    @GetMapping("/classEnrollAnalyticsByMonth")
+//    public HashMap<Integer, Integer> classEnrollByMonth(@RequestParam String startDate){
+//
+//        LocalDate date = LocalDate.parse(startDate, DateTimeFormatter.ISO_DATE);
+//        LocalDate nextYear = date.plusYears(1);
+//        String outputDate = nextYear.atStartOfDay().format(DateTimeFormatter.ISO_OFFSET_DATE_TIME);
+//
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+//        LocalDate localDate = LocalDate.parse(startDate, formatter);
+//        Instant instant = localDate.atStartOfDay(ZoneOffset.UTC).toInstant();
+//        String isoString = DateTimeFormatter.ISO_INSTANT.format(instant);
+//        System.out.println("dates sending to aggregate: "+isoString+" "+outputDate);
+//
+//        List<RegistrationByMonth> monthCounts = registrationService.countOrdersByMonth(isoString, outputDate);
+//        HashMap<Integer, Integer> map = new HashMap<>();
+//        for (RegistrationByMonth monthCount : monthCounts) {
+////            monthCount.setYear();
+//            map.put(monthCount.getMonth(), monthCount.getCount());
+//
+//        }
+//        return map;
+//    }
+
     @GetMapping("/classEnrollAnalyticsByMonth")
     public HashMap<Integer, Integer> classEnrollByMonth(){
         List<RegistrationByMonth> monthCounts = registrationService.countOrdersByMonth();
         HashMap<Integer, Integer> map = new HashMap<>();
         for (RegistrationByMonth monthCount : monthCounts) {
-            System.out.println("Month " + monthCount.getMonth() + ": " + monthCount.getCount() + " orders");
             map.put(monthCount.getMonth(), monthCount.getCount());
-
         }
         return map;
     }
+
 
     @GetMapping("/classEnrollAnalyticsByWeek")
     public HashMap<Integer, Integer> classEnrollByWeek(){
