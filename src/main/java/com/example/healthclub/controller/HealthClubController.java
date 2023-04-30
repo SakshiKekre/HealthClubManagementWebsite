@@ -1,7 +1,6 @@
 package com.example.healthclub.controller;
 
 
-import ch.qos.logback.core.encoder.EchoEncoder;
 import com.example.healthclub.entity.*;
 import com.example.healthclub.repository.LoginRepo;
 import com.example.healthclub.repository.MembershipRepository;
@@ -17,14 +16,14 @@ import com.example.healthclub.entity.Schedule;
 import com.example.healthclub.repository.*;
 
 import com.example.healthclub.service.LocationRepository;
+import com.example.healthclub.service.RegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.configurationprocessor.json.JSONArray;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URLDecoder;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -237,10 +236,42 @@ public class HealthClubController {
 
     //analytics
     //Classes and enrollment by day/week
-    @GetMapping("/classEnrollAnalytics")
-    public List<WeekOutput> classEnroll(){
-        return membershipRepository.fetchYearAnalytics();
+    @Autowired
+    RegistrationService registrationService;
+    @GetMapping("/classEnrollAnalyticsByMonth")
+    public HashMap<Integer, Integer> classEnrollByMonth(){
+        List<RegistrationByMonth> monthCounts = registrationService.countOrdersByMonth();
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (RegistrationByMonth monthCount : monthCounts) {
+            System.out.println("Month " + monthCount.getMonth() + ": " + monthCount.getCount() + " orders");
+            map.put(monthCount.getMonth(), monthCount.getCount());
+
+        }
+        return map;
     }
 
+    @GetMapping("/classEnrollAnalyticsByWeek")
+    public HashMap<Integer, Integer> classEnrollByWeek(){
+        HashMap<Integer, Integer> map = new HashMap<>();
+        List<RegistrationByWeek> weekCounts = registrationService.countOrdersByWeek();
+        for (RegistrationByWeek weekCount : weekCounts) {
+            System.out.println("Week " + weekCount.getWeek() + ": " + weekCount.getCountWeek() + " orders");
+            map.put(weekCount.getWeek(), weekCount.getCountWeek());
+
+        }
+        return map;
+    }
+
+    @GetMapping("/classEnrollAnalyticsByYear")
+    public HashMap<Integer, Integer> classEnrollByYear(){
+        HashMap<Integer, Integer> map = new HashMap<>();
+        List<RegistrationByYear> weekCounts = registrationService.countOrdersByYear();
+        for (RegistrationByYear weekCount : weekCounts) {
+            System.out.println("Week " + weekCount.getYear() + ": " + weekCount.getCountYear() + " orders");
+            map.put(weekCount.getYear(), weekCount.getCountYear());
+
+        }
+        return map;
+    }
 
 }

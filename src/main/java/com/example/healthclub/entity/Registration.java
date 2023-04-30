@@ -44,9 +44,6 @@ public class Registration {
     @Getter
     @Setter
     private String branch;
-//    @Getter
-//    @Setter
-//    private String userName; // to fetch data after registration
     @Getter
     @Setter
     private Schedule classsSchedule;
