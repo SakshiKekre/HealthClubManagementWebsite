@@ -9,7 +9,7 @@ import Footer from "./components/Footer";
 import "./App.css";
 const HomeView = lazy(() => import("./views/Home"));
 const SignInView = lazy(() => import("./views/account/SignIn"));
-const SignUpView = lazy(() => import("./views/account/SignUp"));
+// const SignUpView = lazy(() => import("./views/account/SignUp"));
 const ForgotPasswordView = lazy(() => import("./views/account/ForgotPassword"));
 const EnrollmentView = lazy(() => import("./views/employee/EnrollmentView"));
 const SearchMembersView = lazy(() => import("./views/employee/SearchMembersView"));
