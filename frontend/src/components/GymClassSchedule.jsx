@@ -25,6 +25,12 @@ const SCHEDULES = {
   ],
 };
 
+const processPayload = (jsonData)=>{
+  return jsonData.map(obj=>{
+    return obj.locationName
+  });
+}
+
 function GymClassSchedule() {
   const [locations, setLocations] = useState(LOCATIONS);
   const [selectedLocation, setSelectedLocation] = useState(null);
@@ -32,8 +38,9 @@ function GymClassSchedule() {
 
   useEffect(() => {
     // Fetch the list of locations and set the state
-    fetch('api/locations')
+    fetch('http://localhost:8080/healthclub/findAllLocations')
       .then(response => response.json())
+      .then(payload=>processPayload(payload))
       .then(data => setLocations(data))
       .catch(error => console.error(error));
   }, []);
