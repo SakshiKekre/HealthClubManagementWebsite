@@ -1,7 +1,6 @@
 package com.example.healthclub.controller;
 
 
-import ch.qos.logback.core.encoder.EchoEncoder;
 import com.example.healthclub.entity.*;
 import com.example.healthclub.repository.LoginRepo;
 import com.example.healthclub.repository.MembershipRepository;
@@ -17,16 +16,21 @@ import com.example.healthclub.entity.Schedule;
 import com.example.healthclub.repository.*;
 
 import com.example.healthclub.service.LocationRepository;
+import com.example.healthclub.service.RegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.configurationprocessor.json.JSONArray;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URLDecoder;
-import java.util.List;
-import java.util.Optional;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 @RestController
 @RequestMapping("/healthclub")
@@ -237,10 +241,64 @@ public class HealthClubController {
 
     //analytics
     //Classes and enrollment by day/week
-    @GetMapping("/classEnrollAnalytics")
-    public List<WeekOutput> classEnroll(){
-        return membershipRepository.fetchYearAnalytics();
+    @Autowired
+    RegistrationService registrationService;
+//    @GetMapping("/classEnrollAnalyticsByMonth")
+//    public HashMap<Integer, Integer> classEnrollByMonth(@RequestParam String startDate){
+//
+//        LocalDate date = LocalDate.parse(startDate, DateTimeFormatter.ISO_DATE);
+//        LocalDate nextYear = date.plusYears(1);
+//        String outputDate = nextYear.atStartOfDay().format(DateTimeFormatter.ISO_OFFSET_DATE_TIME);
+//
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+//        LocalDate localDate = LocalDate.parse(startDate, formatter);
+//        Instant instant = localDate.atStartOfDay(ZoneOffset.UTC).toInstant();
+//        String isoString = DateTimeFormatter.ISO_INSTANT.format(instant);
+//        System.out.println("dates sending to aggregate: "+isoString+" "+outputDate);
+//
+//        List<RegistrationByMonth> monthCounts = registrationService.countOrdersByMonth(isoString, outputDate);
+//        HashMap<Integer, Integer> map = new HashMap<>();
+//        for (RegistrationByMonth monthCount : monthCounts) {
+////            monthCount.setYear();
+//            map.put(monthCount.getMonth(), monthCount.getCount());
+//
+//        }
+//        return map;
+//    }
+
+    @GetMapping("/classEnrollAnalyticsByMonth")
+    public HashMap<Integer, Integer> classEnrollByMonth(){
+        List<RegistrationByMonth> monthCounts = registrationService.countOrdersByMonth();
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (RegistrationByMonth monthCount : monthCounts) {
+            map.put(monthCount.getMonth(), monthCount.getCount());
+        }
+        return map;
     }
 
+
+    @GetMapping("/classEnrollAnalyticsByWeek")
+    public HashMap<Integer, Integer> classEnrollByWeek(){
+        HashMap<Integer, Integer> map = new HashMap<>();
+        List<RegistrationByWeek> weekCounts = registrationService.countOrdersByWeek();
+        for (RegistrationByWeek weekCount : weekCounts) {
+            System.out.println("Week " + weekCount.getWeek() + ": " + weekCount.getCountWeek() + " orders");
+            map.put(weekCount.getWeek(), weekCount.getCountWeek());
+
+        }
+        return map;
+    }
+
+    @GetMapping("/classEnrollAnalyticsByYear")
+    public HashMap<Integer, Integer> classEnrollByYear(){
+        HashMap<Integer, Integer> map = new HashMap<>();
+        List<RegistrationByYear> weekCounts = registrationService.countOrdersByYear();
+        for (RegistrationByYear weekCount : weekCounts) {
+            System.out.println("Week " + weekCount.getYear() + ": " + weekCount.getCountYear() + " orders");
+            map.put(weekCount.getYear(), weekCount.getCountYear());
+
+        }
+        return map;
+    }
 
 }
