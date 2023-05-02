@@ -58,7 +58,11 @@ public class Registration {
     @Getter@Setter
     private String checkinTime;
     @Getter@Setter
+    private Date checkinDate;
+    @Getter@Setter
     private String checkoutTime;
+    @Getter@Setter
+    private Date checkoutDate;
     @Getter@Setter
     private Activity activity;
     @Getter@Setter

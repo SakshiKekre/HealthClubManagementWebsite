@@ -54,11 +54,27 @@ public class HealthClubController {
     EmployeeRepository employeeRepository;
 
     @GetMapping("/getHealthOfApp")
-    public ResponseEntity<String> verifyUser() {
+    public ResponseEntity<String> getHealthOfApp() {
         System.out.println("fffff");
-
-        loginRepo.addUser("","","");
         return new ResponseEntity<>("app is up and running", HttpStatus.OK);
+    }
+    @GetMapping("/login/{username}/{password}")
+    public Login verifyUser(@PathVariable String username, @PathVariable String password) {
+        System.out.println("login");
+        // loginRepo.addUser("admin1","admin1","admin");
+        Login log = loginRepo.findUserByName(username);
+        if(log!=null) {
+            if(password.equals(log.getPassword())) {
+                return log;
+            }
+            else {
+                return null;
+            }
+
+        }
+        else {
+            return null;
+        }
     }
 
     @PostMapping("/addMembership")
@@ -92,14 +108,15 @@ public class HealthClubController {
        return membershipRepository.getMembershipData();
     }
 
-   @PostMapping("/doRegister")
-    public String doRegister(@RequestBody Registration r) {
+    @PostMapping("/doRegister")
+    public Registration doRegister(@RequestBody Registration r) {
         if(r!=null) {
-            registrationRepository.doRegister(r);
-            return r.getRegistrationNumber();
+            loginRepo.addUser(r.getUserName(),r.getPassword(),"member");
+            return registrationRepository.doRegister(r);
+
         }
         else {
-            return "registration failed try after some time";
+            return null;
         }
     }
 
@@ -211,6 +228,16 @@ public class HealthClubController {
     @GetMapping("/fetchAllMachines")
     public List<Equipment> allMachines(){
         return equipmentRepository.findAll();
+    }
+
+    @GetMapping("/getMemberByID/{regNumber}")
+    public Registration getMemberByID(@PathVariable String regNumber){
+        return registrationRepository.getMemberByID(regNumber);
+    }
+
+    @GetMapping("/getMemberByEmail/{email}")
+    public Registration getMemberByEmail(@PathVariable String email ){
+        return registrationRepository.getMemberByEmail(email);
     }
 
     //get equipment by location
