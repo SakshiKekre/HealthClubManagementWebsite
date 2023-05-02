@@ -2,11 +2,13 @@ package com.example.healthclub.service;
 
 import com.example.healthclub.entity.Login;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Service;
 
 @Service
 public interface LoginService extends MongoRepository<Login, String> {
-
+    @Query("{userName:'?0'}")
+    Login findUserByName(String name);
    /* @Query("{name:'?0'}")
     GroceryItem findItemByName(String name);
 

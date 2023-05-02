@@ -3,12 +3,16 @@ package com.example.healthclub.entity;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 
 @Document("registration")
 public class Registration {
+
+    @Transient
+    public static final String SEQUENCE_NUMBER = "sequence_number";
     @Id
     @Getter
     @Setter
@@ -23,6 +27,10 @@ public class Registration {
     @Getter
     @Setter
     private String age;
+    @Getter@Setter
+    private String userName;
+    @Getter@Setter
+    private String password;
     @Getter
     @Setter
     private String phone;
@@ -48,13 +56,13 @@ public class Registration {
     @Setter
     private Schedule classsSchedule;
     @Getter@Setter
-    private Membership membershipType;
-    @Getter@Setter
     private String checkinTime;
     @Getter@Setter
     private String checkoutTime;
     @Getter@Setter
     private Activity activity;
+    @Getter@Setter
+    private Location location;
 
     @Getter
     @Setter

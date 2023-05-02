@@ -21,7 +21,7 @@ public class LoginRepo implements LoginService {
     public String addUser(String uName,String pass,String uType) {
 
 
-        loginService.save(new Login("ujwalabalbhim.mote@sjsu.edu", "admin", "M"));
+       // loginService.save(new Login("ujwalabalbhim.mote@sjsu.edu", "admin", "M"));
 
         loginService.findAll().forEach(item -> System.out.println(getItemDetails(item)));
 
@@ -39,7 +39,11 @@ public class LoginRepo implements LoginService {
 
         return "";
     }
-
+    @Override
+    public Login findUserByName(String name) {
+        System.out.println("name*******"+name);
+        return loginService.findUserByName(name);
+    }
 
     @Override
     public long count() {

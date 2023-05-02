@@ -1,6 +1,7 @@
 package com.example.healthclub.entity;
 
 import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -8,34 +9,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Login {
 
     @Id
+    @Getter@Setter
     private String userName;
-    @Getter
+    @Getter@Setter
     private String password;
+    @Getter@Setter
     private String userType;
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getUserType() {
-        return userType;
-    }
-
-    public void setUserType(String userType) {
-        this.userType = userType;
-    }
 
     public Login(String userName, String password, String userType) {
         this.userName = userName;

@@ -9,6 +9,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
@@ -41,5 +42,10 @@ public interface RegistrationService extends MongoRepository<Registration,String
             "{ $project : { year : '$_id', countYear : 1, _id : 0 } }"
     })
     List<RegistrationByYear> countOrdersByYear();
+
+    @Query("{_id:'?0'}")
+    Registration findUserById(String id);
+    @Query("{email:'?0'}")
+    Registration findUserByEmail(String email);
 
 }
