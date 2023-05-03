@@ -1,51 +1,57 @@
 package com.example.healthclub.service;
 
+import com.example.healthclub.entity.DatabaseSequence;
 import com.example.healthclub.entity.Registration;
-import com.example.healthclub.entity.RegistrationByMonth;
-import com.example.healthclub.entity.RegistrationByWeek;
-import com.example.healthclub.entity.RegistrationByYear;
+import com.example.healthclub.repo.RegistrationRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.FindAndModifyOptions;
+import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.repository.Aggregation;
-import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.data.mongodb.repository.Query;
-import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.stereotype.Component;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
+import java.util.Objects;
+
+@Component
+public class RegistrationService {
+    @Autowired
+    RegistrationRepo registrationRepo;
+
+    @Autowired
+    private MongoOperations operations;
+    public Registration doRegister(Registration r) {
+        r.setRegistrationNumber(String.valueOf(generateSequence(Registration.SEQUENCE_NUMBER)));
+
+        return registrationRepo.save(r);
+    }
+    public void deleteRegister(String regNumber) {
+        registrationRepo.deleteById(regNumber);
+    }
+
+    public List<Registration> fetchAllMembers() {
+        return registrationRepo.findAll();
+    }
+    public Registration getMemberByID(String regNumber) {
+        return registrationRepo.findUserById(regNumber);
+    }
+
+    public Registration getMemberByEmail(String email) {
+        return registrationRepo.findUserByEmail(email);
+    }
+
+    public int generateSequence(String seqName) {
+        final Query q = new Query(Criteria.where("registrationNumber").is(seqName));
+        // increment the sequence number by 1
+        // "sequence" should match the attribute value specified in DbSequence.java class.
+        final Update u = new Update().inc("seq", 1);
+        final DatabaseSequence counter = operations.findAndModify(q, u,
+                FindAndModifyOptions.options().returnNew(true).upsert(true), DatabaseSequence.class);
+
+        return !Objects.isNull(counter) ? Integer.parseInt(counter.getSeq()) : 1;
+    }
 
 
-
-@Service
-public interface RegistrationService extends MongoRepository<Registration,String> {
-//    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-//    Date date = dateFormat.parse(bsonDateString);
-    @Aggregation(pipeline = {
-            "{ $group : { _id : { $month : '$membershipStartDate' }, count : { $sum : 1 } } }",
-            "{ $project : { month : '$_id', count : 1, _id : 0 } }"
-    })
-    List<RegistrationByMonth> countOrdersByMonth();
-
-
-    @Aggregation(pipeline = {
-            "{ $group : { _id : { $week : '$membershipStartDate' }, countWeek : { $sum : 1 } } }",
-            "{ $project : { week : '$_id', countWeek : 1, _id : 0 } }"
-    })
-    List<RegistrationByWeek> countOrdersByWeek();
-
-    @Aggregation(pipeline = {
-            "{ $group : { _id : { $year : '$membershipStartDate' }, countYear : { $sum : 1 } } }",
-            "{ $project : { year : '$_id', countYear : 1, _id : 0 } }"
-    })
-    List<RegistrationByYear> countOrdersByYear();
-
-    @Query("{_id:'?0'}")
-    Registration findUserById(String id);
-    @Query("{email:'?0'}")
-    Registration findUserByEmail(String email);
 
 }
