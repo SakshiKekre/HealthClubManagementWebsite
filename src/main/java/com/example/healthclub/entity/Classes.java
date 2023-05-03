@@ -5,27 +5,27 @@ import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document("schedule")
-public class Schedule {
+@Document("Classes")
+public class Classes {
     @Id
     @Getter
     @Setter
-    private String scheduleId;
-    @Getter@Setter
-    private String timeSlot;
-    @Getter@Setter
-    private String className;
-    //to update capacity in classes
-    @Getter@Setter
     private String classId;
     @Getter@Setter
-    private String regNumber;
-   /* @Getter@Setter
-    @Field("capacity")
-    private int capacity=30;*/
+    private String timeSlots;
+    @Getter@Setter
+    private String className;
+    // comma seperated days string
+    @Getter@Setter
+    private String availableDays;
+    @Getter@Setter
+    private String location;
+    @Getter@Setter
+    private String locationId;
+    @Getter@Setter
+    private int capacity;
     @Getter@Setter
     private String instructor;
     @Getter@Setter
     private String membership;
-
 }

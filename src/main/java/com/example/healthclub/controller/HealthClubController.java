@@ -2,32 +2,21 @@ package com.example.healthclub.controller;
 
 
 import com.example.healthclub.entity.*;
-import com.example.healthclub.service.LoginService;
-import com.example.healthclub.service.MembershipService;
-import com.example.healthclub.service.RegistrationService;
-import com.example.healthclub.service.ScheduleService;
 import com.example.healthclub.repo.EquipmentRepository;
 import com.example.healthclub.repo.GymRepository;
-
-import com.example.healthclub.entity.Location;
-import com.example.healthclub.entity.Membership;
-import com.example.healthclub.entity.Registration;
-import com.example.healthclub.entity.Schedule;
-import com.example.healthclub.service.*;
-
 import com.example.healthclub.repo.LocationRepository;
 import com.example.healthclub.repo.RegistrationRepo;
+import com.example.healthclub.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URLDecoder;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
-
-import java.util.*;
 
 
 @RestController
@@ -54,15 +43,18 @@ public class HealthClubController {
     @Autowired
     ActivityService activityService;
 
+    @Autowired
+    ClassesService classesService;
+
     @GetMapping("/getHealthOfApp")
     public ResponseEntity<String> getHealthOfApp() {
         System.out.println("fffff");
-        return new ResponseEntity<>("app is up and running", HttpStatus.OK);
+         return new ResponseEntity<>("app is up and running", HttpStatus.OK);
     }
     @GetMapping("/login/{username}/{password}")
     public Login verifyUser(@PathVariable String username, @PathVariable String password) {
         System.out.println("login");
-        // loginRepo.addUser("admin1","admin1","admin");
+       // loginRepo.addUser("admin1","admin1","admin");
         Login log = loginService.findUserByName(username);
         if(log!=null) {
             if(password.equals(log.getPassword())) {
@@ -147,6 +139,17 @@ public class HealthClubController {
         }
     }
 
+    @GetMapping("/getClassesByLoc/{locationId}")
+    public List<Classes> getClassesByLoc(@PathVariable String locationId) {
+        return classesService.getClassesByLoc(locationId);
+    }
+
+    @PostMapping("/addClasses")
+    public Classes getClassesByLoc(@RequestBody Classes c) {
+        return classesService.addClasses(c);
+    }
+
+
     @PostMapping("/addSchedule")
     public String addSchedule(@RequestBody Schedule s) {
         System.out.println("in the add schedule method");
@@ -170,9 +173,12 @@ public class HealthClubController {
         }
     }
 
+    @GetMapping("/getAllScheduleForMember/{regNumber}")
+    public List<Schedule> getAllScheduleForMember(@PathVariable String regNumber) {
+        return scheduleService.getAllScheduleForMember(regNumber);
+    }
 
-
-    @GetMapping("getAllScheduleData")
+    @GetMapping("/getAllScheduleData")
     public List<Schedule> getAllScheduleData() {
         return scheduleService.getAllSchedule();
     }

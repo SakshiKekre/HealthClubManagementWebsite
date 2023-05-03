@@ -10,7 +10,6 @@ import java.util.Date;
 
 @Document("registration")
 public class Registration {
-
     @Transient
     public static final String SEQUENCE_NUMBER = "sequence_number";
     @Id
@@ -52,9 +51,11 @@ public class Registration {
     @Getter
     @Setter
     private String branch;
-    @Getter
+    /*@Getter
     @Setter
-    private Schedule classsSchedule;
+    private Schedule classsSchedule;*/
+   /* @Getter@Setter
+    private Membership membershipType;*/
     @Getter@Setter
     private String checkinTime;
     @Getter@Setter
@@ -63,16 +64,16 @@ public class Registration {
     private String checkoutTime;
     @Getter@Setter
     private Date checkoutDate;
-    @Getter@Setter
-    private Activity activity;
+   /* @Getter@Setter
+    private List<Activity> activity;*/
     @Getter@Setter
     private Location location;
-
     @Getter
     @Setter
     private String validity;// month,day or year
     @Getter@Setter
     private Membership membership;
+    /// to keep track of validity of membership
     @Getter@Setter
     private Date membershipStartDate;
     @Getter

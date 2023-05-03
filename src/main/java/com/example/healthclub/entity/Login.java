@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document("login")
 public class Login {
 
+
     @Id
     @Getter@Setter
     private String userName;
@@ -15,7 +16,6 @@ public class Login {
     private String password;
     @Getter@Setter
     private String userType;
-
 
     public Login(String userName, String password, String userType) {
         this.userName = userName;

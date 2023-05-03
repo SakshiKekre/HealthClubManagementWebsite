@@ -5,7 +5,7 @@ import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Document("activity")
 public class Activity {
@@ -13,13 +13,18 @@ public class Activity {
     @Getter@Setter
     private String activityId;
     @Getter@Setter
+    private String registrationNumber;
+    @Getter@Setter
     private String activityType;
     @Getter@Setter
-    private Date activityStartTime;
+    private LocalDate activityPerformedDate;
+
     @Getter@Setter
-    private Date activityEndTime;
-   /* @Getter@Setter
-    private Location location;*/
+    private String activityStartTime;
+    @Getter@Setter
+    private String activityEndTime;
+    @Getter@Setter
+    private Location location;
     @Getter@Setter
     private String equipment;
 

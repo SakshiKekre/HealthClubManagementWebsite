@@ -1,6 +1,6 @@
 package com.example.healthclub.service;
 
-import com.example.healthclub.entity.Registration;
+import com.example.healthclub.entity.Classes;
 import com.example.healthclub.entity.Schedule;
 import com.example.healthclub.repo.ScheduleRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,9 +30,9 @@ public class ScheduleService {
     }
     public String updateClassCapacity (Schedule s) {
         // registration.setCheckoutTime(checkoutTime);
-        Query query = new Query(Criteria.where("regNumber").is(s.getRegNumber()));
+        Query query = new Query(Criteria.where("classId").is(s.getClassId()));
         Update update = new Update().inc("capacity", -1);
-        mongoTemplate.updateFirst(query, update, Registration.class);
+        mongoTemplate.updateFirst(query, update, Classes.class);
         return "";
     }
     public void deleteSchedule(String s) {
@@ -41,6 +41,10 @@ public class ScheduleService {
 
     public List<Schedule> getAllSchedule() {
         return scheduleRepo.findAll();
+    }
+
+    public List<Schedule> getAllScheduleForMember(String regNumber){
+        return scheduleRepo.getAllScheduleForMember(regNumber);
     }
 
     //class search by location
