@@ -5,7 +5,9 @@ function Memberships() {
 
   useEffect(() => {
     // Fetch all the memberships and set the state
-    fetch('http://localhost:8080/healthclub/getMembershipData')
+    const membershipAPI = process.env.REACT_APP_API_URL +"/getMembershipData";
+    console.log("MEMBERSHIP API:" + membershipAPI);
+    fetch(membershipAPI)
       .then(response => response.json())
       .then(payload=>{setResp(payload)})
       .catch(error => console.error(error));
@@ -20,7 +22,7 @@ function Memberships() {
           </div>
           <ul className='list-unstyled'>
             {resp.map(child => (
-              <li>
+              <li key={child.membershipType}>
                 <div className="card membership-block">      
                   <div className="card-body">
                     <h3 className="card-title">{child.membershipType.toUpperCase()}</h3>
