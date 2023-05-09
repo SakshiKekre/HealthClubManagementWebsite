@@ -6,7 +6,7 @@ function Memberships() {
   useEffect(() => {
     // Fetch all the memberships and set the state
     const membershipAPI = process.env.REACT_APP_API_URL +"/getMembershipData";
-    console.log("MEMBERSHIP API:" + membershipAPI);
+    // console.log("MEMBERSHIP API:" + membershipAPI);
     fetch(membershipAPI)
       .then(response => response.json())
       .then(payload=>{setResp(payload)})

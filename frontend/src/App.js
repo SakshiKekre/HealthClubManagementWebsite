@@ -14,6 +14,7 @@ const ForgotPasswordView = lazy(() => import("./views/account/ForgotPassword"));
 const EnrollmentView = lazy(() => import("./views/employee/EnrollmentView"));
 const SearchMembersView = lazy(() => import("./views/employee/SearchMembersView"));
 const MemberAnalytics = lazy(() => import("./views/employee/Analytics"));
+const MemberActivities = lazy(() => import("../src/views/member/MyActivitiesView"));
 
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
             <Route exact path="/employee/enrollmember" element={<EnrollmentView/>} />
             <Route exact path="/employee/searchmembers" element={<SearchMembersView/>} />
             <Route exact path="/employee/viewAnalytics" element={<MemberAnalytics/>} />
+            <Route exact path="/member/activities" element={<MemberActivities/>} />
           </Routes>
         </Suspense>
         
