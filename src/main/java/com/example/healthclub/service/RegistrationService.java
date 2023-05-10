@@ -2,6 +2,7 @@ package com.example.healthclub.service;
 
 import com.example.healthclub.entity.DatabaseSequence;
 import com.example.healthclub.entity.Registration;
+import com.example.healthclub.entity.RegistrationByMonth;
 import com.example.healthclub.repo.RegistrationRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.FindAndModifyOptions;
@@ -10,6 +11,12 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Component;
+
+import org.springframework.data.mongodb.core.aggregation.Aggregation;
+import org.springframework.data.mongodb.core.aggregation.AggregationResults;
+import org.springframework.data.mongodb.core.MongoOperations;
+import static org.springframework.data.mongodb.core.aggregation.Aggregation.*;
+
 
 import java.util.List;
 import java.util.Objects;
@@ -23,7 +30,6 @@ public class RegistrationService {
     private MongoOperations operations;
     public Registration doRegister(Registration r) {
         r.setRegistrationNumber(String.valueOf(generateSequence(Registration.SEQUENCE_NUMBER)));
-
         return registrationRepo.save(r);
     }
     public void deleteRegister(String regNumber) {
@@ -52,6 +58,19 @@ public class RegistrationService {
         return !Objects.isNull(counter) ? Integer.parseInt(counter.getSeq()) : 1;
     }
 
+    Aggregation agg = newAggregation(
+            project("membershipStartDate"),
+            project("month").andExpression("{ $month: \"$membershipStartDate\" }").as("month"),
+            group("month").count().as("count")
+    );
 
+
+
+    public List<RegistrationByMonth> getMonthRegistration(){
+        AggregationResults<RegistrationByMonth> results = operations.aggregate(agg, Registration.class, RegistrationByMonth.class);
+        List<RegistrationByMonth> mappedResults = results.getMappedResults();
+        System.out.println(mappedResults);
+        return mappedResults;
+    }
 
 }

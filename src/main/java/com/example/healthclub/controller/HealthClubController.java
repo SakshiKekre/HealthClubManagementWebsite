@@ -52,7 +52,7 @@ public class HealthClubController {
          return new ResponseEntity<>("app is up and running", HttpStatus.OK);
     }
     @GetMapping("/login/{username}/{password}")
-    public Login verifyUser(@PathVariable String username, @PathVariable String password) {
+    public Object verifyUser(@PathVariable String username, @PathVariable String password) {
         System.out.println("login");
        // loginRepo.addUser("admin1","admin1","admin");
         Login log = loginService.findUserByName(username);
@@ -61,12 +61,11 @@ public class HealthClubController {
                 return log;
             }
             else {
-                return null;
+                return "wrong cred";
             }
-
         }
         else {
-            return null;
+            return "wrong cred";
         }
     }
 
@@ -259,9 +258,6 @@ public class HealthClubController {
         return equipmentService.findAllByLocationLocationName(decodedParam);
     }
 
-
-
-
     @PostMapping("/checkinMember")
     public String checkinMember(@RequestBody Registration registration) {
         registration.setCheckinDate(new Date());
@@ -274,6 +270,16 @@ public class HealthClubController {
         employeeService.checkoutMember(registration, String.valueOf(new Date()));
         return "checkout time update success";
     }
+
+    /// to check if the user has checked in or not
+    @GetMapping("/isCheckedin")
+    public boolean isCheckedin(@RequestParam String email){
+        Registration user = registrationService.findUserByEmail(email);
+        if(user.getCheckinDate().compareTo(user.getCheckoutDate())>0)
+            return true;
+        return false;
+    }
+
 
     //////
     //// front end to send reg number in activity obj
@@ -341,13 +347,15 @@ public class HealthClubController {
 
     @GetMapping("/classEnrollAnalyticsByMonth")
     public HashMap<Integer, Integer> classEnrollByMonth(){
-        List<RegistrationByMonth> monthCounts = registrationService.countOrdersByMonth();
+        List<RegistrationByMonth> monthCounts = registrationService1.getMonthRegistration();
         HashMap<Integer, Integer> map = new HashMap<>();
         for (RegistrationByMonth monthCount : monthCounts) {
             map.put(monthCount.getMonth(), monthCount.getCount());
         }
         return map;
     }
+
+
 
 
     @GetMapping("/classEnrollAnalyticsByWeek")

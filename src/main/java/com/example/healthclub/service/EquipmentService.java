@@ -7,6 +7,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public interface EquipmentRepository extends MongoRepository<Equipment, String> {
+public interface EquipmentService extends MongoRepository<Equipment, String> {
     public List<Equipment> findAllByLocationLocationName(String locationName);
 }

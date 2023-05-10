@@ -37,4 +37,5 @@ public interface RegistrationRepo extends MongoRepository<Registration,String> {
     Registration findUserById(String id);
     @Query("{email:'?0'}")
     Registration findUserByEmail(String email);
+
 }
