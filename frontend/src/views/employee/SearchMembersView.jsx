@@ -1,19 +1,28 @@
 import React, { lazy, Component } from "react";
 const GymMembersList = lazy(() => import("../../components/Employee/GymMembersList"));
+const LeftNavigation = lazy(() => import("../../components/LeftNavigation"));
 
+
+const userName = "John";
+const userRole = "employee";
 
 class SearchMembersView extends Component {
   state = { imagePreview: "", isDeleting: false };
-
+  
   onSubmit = async (values) => {
     alert(JSON.stringify(values));
   };
 
+  
 
   render() {
     return (
       <div className="container-fluid my-3">
         <div className="row">
+        <div className="col-md-2">
+          <LeftNavigation userName={userName} userRole={userRole}/> 
+          
+          </div>
           <div className="col-md-6">
           <h4 className="text-center">Search Members</h4>
             <GymMembersList

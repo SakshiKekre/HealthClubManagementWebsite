@@ -21,29 +21,29 @@ import { Dropdown } from 'react-bootstrap';
 
 const LOCATIONS = ['San Jose', 'Fremont', 'San Francisco', 'Dublin'];
 const columns = [
-  { field: 'id', headerName: 'Member ID', width: 100 },
-  { field: 'name', headerName: 'Name', width: 130 },
+  { field: 'registrationNumber', headerName: 'Member ID', width: 100 },
+  { field: 'fname', headerName: 'Name', width: 130 },
   { field: 'email', headerName: 'Email', width: 130 },
   { field: 'phone', headerName: 'Phone', width: 100 },
   { field: 'location', headerName: 'Primary Location', width: 150 },
-  { field: 'doj', headerName: 'Date of Joining', width: 150 },
+  { field: 'membershipStartDate', headerName: 'Date of Joining', width: 150 },
   { field: 'membership_status', headerName: 'Status', width: 100 },
   {
     field: 'checkedIn',
     headerName: 'Checked In',
     width: 120,
     renderCell: (params) => {
-      return <CustomButton value={params.row.id} />;
+      return <CustomButton value={params.row.registrationNumber} />;
     },
   },
 ];
 
-const rows = [
-  { id: 1, name: 'John Doe',  email: 'john.doe@example.com', phone: '555-1234',location:'San Jose',doj:'2021-09-01',membership_status:'Active',checkedIn:false},
-  { id: 2, name: 'Jane Doe',  email: 'jane.doe@example.com', phone: '555-5678',location:'San Jose',doj:'2021-09-01',membership_status:'Active',checkedIn:false},
-  { id: 3, name: 'Bob Smith', email: 'bob.smith@example.com', phone: '555-9876',location:'San Jose',doj:'2021-09-01',membership_status:'Active',checkedIn:false},
-  // add more rows as needed
-];
+// const rows = [
+//   { id: 1, name: 'John Doe',  email: 'john.doe@example.com', phone: '555-1234',location:'San Jose',doj:'2021-09-01',membership_status:'Active',checkedIn:false},
+//   { id: 2, name: 'Jane Doe',  email: 'jane.doe@example.com', phone: '555-5678',location:'San Jose',doj:'2021-09-01',membership_status:'Active',checkedIn:false},
+//   { id: 3, name: 'Bob Smith', email: 'bob.smith@example.com', phone: '555-9876',location:'San Jose',doj:'2021-09-01',membership_status:'Active',checkedIn:false},
+//   // add more rows as needed
+// ];
 
 function CustomButton({ value }) {
   function handleClick() {
@@ -60,7 +60,7 @@ function CustomButton({ value }) {
 
 function GymMembersList() {
 
-  const [searchResults, setSearchResults] = useState(rows);
+  const [searchResults, setSearchResults] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const location = useLocation();
   const { history } = location;
@@ -68,15 +68,25 @@ function GymMembersList() {
 
   const handleSearch = () => {
     alert(`Searching for ${searchTerm}`)
-    const results = rows.filter(row => {
-      return row.id.toString().includes(searchTerm) || row.email.includes(searchTerm);
+    const url = 'http://localhost:8080/healthclub/getMemberByID/'+searchTerm;
+    fetch(url)
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+      setSearchResults(Array.from(data))
     });
-    setSearchResults(results);
+    
+
+    // const results = rows.filter(row => {
+    //   return row.id.toString().includes(searchTerm) || row.email.includes(searchTerm);
+    // });
+    // setSearchResults(results);
+
   };
 
   const handleClear = () => {
     setSearchTerm('');
-    setSearchResults(rows);
+    setSearchResults([]);
   };
 
   const handleSearchTermChange = (event) => {
@@ -96,10 +106,22 @@ function GymMembersList() {
     }
   };
 
-  const rowsWithCheckinStatus = rows.map((row) => {
+  // const rowsWithCheckinStatus = searchResults.map((row) => {
+  //   return {
+  //     ...row,
+  //     checkedIn: row.id === checkedInId,
+  //   };
+  // });
+  const rowsWithCheckinStatus = searchResults.map((row) => {
     return {
-      ...row,
-      checkedIn: row.id === checkedInId,
+      registrationNumber: row.registrationNumber,
+      fname: row.fname,
+      email: row.email,
+      phone: row.phone,
+      location: row.location,
+      membershipStartDate: row.membershipStartDate,
+      membership_status: row.membership.membershipType,
+      checkedIn: 'false',
     };
   });
   return (
@@ -115,7 +137,7 @@ function GymMembersList() {
         columns={columns}
         pageSize={5}
         disableSelectionOnClick
-        onRowClick={(params) => console.log(`Row clicked: ${params.id}`)}
+        onRowClick={(params) => console.log(`Row clicked: ${params.registrationNumber}`)}
       />
     </div>
     </div>

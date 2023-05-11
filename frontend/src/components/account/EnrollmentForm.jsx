@@ -21,6 +21,7 @@ import { ReactComponent as IconCalendarEvent } from "bootstrap-icons/icons/calen
 import { ReactComponent as IconPersonSquareFill } from "bootstrap-icons/icons/person-lines-fill.svg";
 
 const LOCATIONS = ['San Jose', 'Fremont', 'San Francisco', 'Dublin'];
+const MEMBERSHIP_TYPES = ['Basic', 'Premium', 'Platinum'];
 
 const EnrollmentForm = (props) => {
   const {
@@ -31,8 +32,35 @@ const EnrollmentForm = (props) => {
     onImageChange,
     imagePreview,
   } = props;
-  const [locations, setLocations] = useState(LOCATIONS);
+  //const [locations, setLocations] = useState(LOCATIONS);
+  //const [membershipTypes, setMembershipTypes] = useState(MEMBERSHIP_TYPES);
+  const [locations, setLocations] = useState([]);
+  const [membershipTypes, setMembershipTypes] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState(null);
+  const [selectedMembershipType, setSelectedMembershipType] = useState(null);
+
+  
+  useEffect(() => {
+    // Fetch locations
+    fetch("http://localhost:8080/healthclub/findAllLocations")
+      .then((response) => response.json())
+      .then((data) => setLocations(data));
+
+    // Fetch membership types
+    fetch("http://localhost:8080/healthclub/getMembershipData")
+      .then((response) => response.json())
+      .then((data) => setMembershipTypes(data));
+  }, []);
+
+  const handleLocationDropdownChange = (location) => {
+    console.log(location);
+    setSelectedLocation(location);
+  }
+
+  const handleMembershipDropdownChange = (e) => {
+    console.log(e);
+    setSelectedMembershipType(e);
+  }
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -41,9 +69,7 @@ const EnrollmentForm = (props) => {
     >
       <div className="card border-primary">
 
-        <div className="card-body">
-         
-        </div>
+
         <ul className="list-group list-group-flush">
           <li className="list-group-item">
             <Field
@@ -86,18 +112,34 @@ const EnrollmentForm = (props) => {
               type="text"
               component={renderFormGroupField}
               placeholder="Member location"
-              icon={IconGeoAlt}
+              icon={IconGeoAlt}onClick={() => handleLocationDropdownChange(location.locationName)}
               validate={[required]}
               required={true}
             /> */}
-             <Dropdown>
+        <Dropdown>
         <Dropdown.Toggle variant="secondary">
           {selectedLocation ? selectedLocation : 'Select Primary Location'}
+          
+          <input type="hidden" name="LocationId" value={selectedLocation} />
         </Dropdown.Toggle>
-        <Dropdown.Menu>
+        <Dropdown.Menu >
           {locations.map(location => (
-            <Dropdown.Item key={location} value={location} >
-              {location}
+            <Dropdown.Item key={location.locationID} eventKey={location.locationID} value = {location.locationID  } >
+              {location.locationName}
+            </Dropdown.Item>
+          ))}
+        </Dropdown.Menu>
+      </Dropdown>
+      <br/>
+      <Dropdown>
+        <Dropdown.Toggle variant="secondary">
+          {selectedMembershipType ? selectedMembershipType : 'Select Membership Type'}
+        </Dropdown.Toggle>
+    
+        <Dropdown.Menu >
+          {membershipTypes.map(membershipType => (
+            <Dropdown.Item key={membershipType.membershipType} eventKey={membershipType.membershipType}  value={membershipType.membershipType} onClick={() => handleMembershipDropdownChange(membershipType.membershipType)}>
+              {membershipType.membershipType}
             </Dropdown.Item>
           ))}
         </Dropdown.Menu>
