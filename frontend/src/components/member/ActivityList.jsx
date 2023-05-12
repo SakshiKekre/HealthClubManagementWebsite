@@ -5,7 +5,7 @@ import { compose } from "redux";
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { DataGrid } from '@mui/x-data-grid';
-
+import { Button } from "react-bootstrap";
 
 function ActivityList() {
 
@@ -78,8 +78,8 @@ function ActivityList() {
     <div style={{ height: 400, width: '100%' }}>
       <div>
         <input type="text" placeholder="Search by equipment name" value={searchTerm} onChange={handleSearchTermChange} />
-        <button onClick={handleSearch}>Search</button>
-        <button onClick={handleClear}>Clear</button>
+        <Button onClick={handleSearch}>Search</Button>
+        <Button onClick={handleClear}>Clear</Button>
       </div>
       <div style={{ height: 400, width: '100%' }}>
         <DataGrid rows={searchResults}

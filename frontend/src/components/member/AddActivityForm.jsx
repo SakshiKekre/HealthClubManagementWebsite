@@ -1,33 +1,51 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { Field, reduxForm } from "redux-form";
 import { compose } from "redux";
 import renderFormGroupField from "../../helpers/renderFormGroupField";
 import renderFormSelect from "../../helpers/renderFormSelect";
+import { Button } from "react-bootstrap";
+import { Link } from 'react-router-dom';
+
 import {
   required,
   name
 } from "../../helpers/validation";
-import { ReactComponent as IconPerson } from "bootstrap-icons/icons/person.svg";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import { ReactComponent as IconPhone } from "bootstrap-icons/icons/phone.svg";
+import { ReactComponent as IconEmail } from "bootstrap-icons/icons/envelope.svg";
+import { ReactComponent as IconShieldLock } from "bootstrap-icons/icons/shield-lock.svg";
+import { ReactComponent as IconPerson } from "bootstrap-icons/icons/person.svg";
+
 import { ReactComponent as IconGeoAlt } from "bootstrap-icons/icons/geo-alt.svg";
 import { ReactComponent as IconCalendarEvent } from "bootstrap-icons/icons/calendar-event.svg";
 import { ReactComponent as IconPersonSquareFill } from "bootstrap-icons/icons/person-lines-fill.svg";
 
-const locationOptions = [
-  { label: 'San Jose', value: 'San Jose' },
-  { label: 'Option 2', value: 'option2' },
-  { label: 'Option 3', value: 'option3' }
-];
-
 const AddActivityForm = (props) => {
-  const {
-    handleSubmit,
-    submitting,
-    onSubmit,
-    submitFailed,
-    onImageChange,
-    imagePreview,
-  } = props;
+  const { handleSubmit, submitting, onSubmit, submitFailed } = props;
+
+  const locations = {label:"SJ",value:"SJ"}
+  // const [response, setResponse] = useState([]);
+  // const [locations, setLocations] = useState([]);
+
+  // useEffect(() => {
+  //   // Fetch all the memberships and set the state
+  //   const LocationAPI = process.env.REACT_APP_API_URL +"/findAllLocations";
+  //   fetch(LocationAPI)
+  //     .then(response => response.json())
+  //     .then(payload=>{setResponse(payload)})
+  //     .catch(error => console.error(error));
+  // },[]);
+
+  // useEffect(() => {
+  //   const locationOptions = response.map((location) => ({
+  //     label: location.locationName,
+  //     value: location.locationName,
+  //   }));
+  //   setLocations(locationOptions);
+  // },[response]);
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -35,34 +53,16 @@ const AddActivityForm = (props) => {
       noValidate
     >
       <div className="card border-primary">
-        <h6 className="card-header">
-          <IconPersonSquareFill /> Add a new activity
-        </h6>
-        {/* <img
-          src={imagePreview ? imagePreview : "../../images/NO_IMG.png"}
-          alt=""
-          className="card-img-top rounded-0 img-fluid bg-secondary"
-        /> */}
-        {/* <div className="card-body">
-          <Field
-            name="formFile"
-            component={renderFormFileInput}
-            onImageChange={onImageChange}
-            validate={[required]}
-            tips="You don't allow uploading a photo more than 5MB"
-          />
-          <p className="card-text">
-            With supporting text below as a natural lead-in to additional
-            content.
-          </p>
-        </div> */}
-        <ul className="list-group list-group-flush">
-          <li className="list-group-item">
-            <Field
+         <h6 className="card-header">
+           <IconPersonSquareFill /> Add a new activity
+         </h6>
+         <ul className="list-group list-group-flush">
+           {/* <li className="list-group-item">
+             <Field
               name="location"
               type="text"
               component={renderFormSelect}
-              options={locationOptions}
+              options={locations}
               label="Location"
               icon={IconPerson}
               validate={[required, name]}
@@ -74,13 +74,13 @@ const AddActivityForm = (props) => {
               name="equipment"
               type="text"
               component={renderFormSelect}
-              options={locationOptions}
+              options={locations}
               label="Equipment"
               icon={IconPhone}
               validate={required}
               required={true}
             />
-          </li>
+          </li> */}
           <li className="list-group-item">
             <Field
               name="usageDate"
@@ -115,14 +115,26 @@ const AddActivityForm = (props) => {
             />
           </li>
         </ul>
-        <div className="card-body">
+        <div className="card-body d-flex justify-content-center">
           <button
             type="submit"
-            className="btn btn-primary  d-flex"
+            className="btn btn-primary"
+            style={{ marginRight: '0.5rem' }}
+
             disabled={submitting}
           >
-            Submit
+            Add
           </button>
+          <Link to="/member/activities">
+            <button
+              // type="cancel"
+              className="btn btn-primary"
+              style={{ marginRight: '0.5rem' }}
+              disabled={submitting}
+            >
+              Cancel
+            </button>
+          </Link>
         </div>
       </div>
     </form>
@@ -131,6 +143,6 @@ const AddActivityForm = (props) => {
 
 export default compose(
   reduxForm({
-    form: "profile",
+    form: "addactivity",
   })
 )(AddActivityForm);

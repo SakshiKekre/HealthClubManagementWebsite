@@ -1,63 +1,74 @@
 import React, { lazy, Component } from "react";
+import { Link,useHistory,useNavigate } from "react-router-dom";
 const AddActivityForm = lazy(() => import("../../components/member/AddActivityForm"));
-// const ChangePasswordForm = lazy(() =>
-//   import("./ChangePasswordForm")
-// );
-// const SettingForm = lazy(() => import("./SettingForm"));
-// const CardListForm = lazy(() =>
-//   import("./CardListForm")
-// );
+const LeftNav = lazy(() => import("../../components/LeftNavigation"));
 
-class AddActivityView extends Component {
-  state = { imagePreview: "", isDeleting: false };
+function AddActivityView()  {
+ 
+  const navigate = useNavigate();
 
-  onSubmitProfile = async (values) => {
-    alert(JSON.stringify(values));
+  const onSubmit = async (values) => {
+    // const body = JSON.stringify(values)
+    
+    const requestBody = {
+      registrationNumber: '4',
+      activityStartTime: values.startTime,
+      activityEndTime: values.endTime,
+      activityPerformedDate: values.usageDate
+    };
+// activityId: "645e000c15a2730cc2e99c5e"
+// activityPerformedDate: null
+// activityStartTime: null
+// activityType: null
+// equipment: null
+// location: null
+// registrationNumber: "4"
+
+    console.log(JSON.stringify(values));
+    console.log(JSON.stringify(requestBody));
+    console.log(values.usageDate);
+    console.log(values.startTime);
+    console.log(values.endTime);
+    // body.newProperty("registrationNumber:4");
+    console.log('INSIDE SIBUMIT');
+  
+    const url = 'http://localhost:8080/healthclub/addActivity';
+    //const userType = 'employee';
+
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(requestBody),
+      redirect: 'follow'
+    })
+    .then(response => {
+      console.log('insode response');
+      //console.log(response.json())
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      navigate('/member/activities');
+    })
+    
   };
-
-  onSubmitChangePassword = async (values) => {
-    alert(JSON.stringify(values));
-  };
-
-  onImageChange = async (obj) => {
-    if (obj) {
-      const val = await this.getBase64(obj);
-      this.setState({ imagePreview: val });
-    } else {
-      this.setState({ imagePreview: "" });
-    }
-  };
-
-  getBase64 = (file) => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = () => resolve(reader.result);
-      reader.readAsDataURL(file);
-      reader.onerror = (error) => reject(error);
-    });
-  };
-  render() {
     return (
       <div className="container-fluid my-3">
         <div className="row">
-          <div className="col-md-4">
-            <AddActivityForm
-              onSubmit={this.onSubmitProfile}
-              onImageChange={this.onImageChange}
-              imagePreview={this.state.imagePreview}
-            />
-          </div>
-          {/* <div className="col-md-8">
-            <ChangePasswordForm onSubmit={this.onSubmitChangePassword} />
-            <br></br>
-            <SettingForm />
-            <br></br>
-            <CardListForm />
-          </div> */}
+        <div className="col-md-2"> 
+            <LeftNav/>
         </div>
+        <div className="col-md-10 row border">
+          {/* <div className="col-md-2"> */}
+            <h4 className="text-center">Add activity data</h4>
+            <AddActivityForm onSubmit={onSubmit} />
+          {/* </div> */}
+        </div>
+        </div>
+
       </div>
     );
   }
-}
 
 export default AddActivityView;
