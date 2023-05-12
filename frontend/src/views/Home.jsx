@@ -32,17 +32,17 @@ class HomeView extends Component {
             <div className="col-sm-3">
               <Link to="/" className="text-decoration-none">
                 <img
-                  src="../../images/1189.jpg"
+                  src="../../images/image7_191x191.jpeg"
                   className="rounded mx-auto d-block"
                   alt="..."
                 />
-                <div className="text-center h6">San Jose</div>
+                <div className="text-center h6">Newpark Mall Road</div>
               </Link>
             </div>
             <div className="col-sm-3">
               <Link to="/" className="text-decoration-none">
                 <img
-                  src="../../images/1189.jpg"
+                  src="../../images/image3_191x191.jpeg"
                   className="rounded mx-auto d-block"
                   alt="..."
                 />
@@ -52,21 +52,21 @@ class HomeView extends Component {
             <div className="col-sm-3">
               <Link to="/" className="text-decoration-none">
                 <img
-                  src=".../../images/1189.jpg"
+                  src=".../../images/image5_191x191.jpeg"
                   className="rounded mx-auto d-block"
                   alt="..."
                 />
-                <div className="text-center h6">San Francisco</div>
+                <div className="text-center h6">San Jose</div>
               </Link>
             </div>
             <div className="col-sm-3">
               <Link to="/" className="text-decoration-none">
                 <img
-                  src="../../images/1189.jpg"
+                  src="../../images/image6_191x191.jpeg"
                   className="rounded mx-auto d-block"
                   alt="..."
                 />
-                <div className="text-center h6">Dublin </div>
+                <div className="text-center h6">San Franciso</div>
               </Link>
             </div>
           </div>
