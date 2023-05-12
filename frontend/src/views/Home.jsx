@@ -13,7 +13,7 @@ const CardDealsOfTheDay = lazy(() =>
   import("../components/card/CardDealsOfTheDay")
 );
 const GymClassSchedule = lazy(() => import("../components/GymClassSchedule"));
-
+const Memberships = lazy(() => import("../components/Memberships"));
 
 class HomeView extends Component {
 
@@ -23,28 +23,6 @@ class HomeView extends Component {
      return (
       <React.Fragment>
         <Banner className="mb-3" id="carouselHomeBanner" data={data.banner} />
-        {/* <div className="container-fluid bg-light mb-3">
-          <div className="row g-3">
-            <div className="col-md-9">
-            </div>
-           
-          </div>
-        </div> */}
-        {/* <div className="container-fluid bg-light mb-3">
-          <div className="row">
-            <div className="col-md-12">
-            <CardDealsOfTheDay
-                endDate={Date.now() + 1000 * 60 * 60 * 14}
-                title="Deals of the Day"
-                to="/"
-              >
-                <Carousel id="elect-product-category1">
-                  {carouselContent}
-                </Carousel>
-              </CardDealsOfTheDay>
-            </div>
-          </div>
-        </div> */}
 
         <div className="bg-dark p-3 text-center mb-3 text-white">
           <h4 className="m-0">Locations</h4>
@@ -98,33 +76,7 @@ class HomeView extends Component {
 
   <div class="row">
     <div class="col-4">
-      <div class="container">
-          <div className="bg-dark p-3 text-center mb-3 text-white">
-                <h4 className="m-0">Memberships</h4>
-          </div>
-          <div class="card membership-block">
-              
-            <div class="card-body">
-              <h3 class="card-title">Basic Gym Package</h3>
-              <ul class="list-unstyled">
-                <li>Access to gym equipment during regular business hours</li>
-                <li>Locker and shower facilities</li>
-                <li>Discounted rates on group fitness classes</li>
-                <li>Basic nutritional guidance and support</li>
-                
-              </ul>
-            </div>
-          </div>
-          <div class="card membership-block">
-              <h3>Premium Gym Package</h3>
-              <ul>
-                <li>24/7 access to gym equipment</li>
-                <li>Private locker and shower facilities</li>
-                <li>Unlimited access to all location</li>
-                <li>Personalized nutrition plan</li>
-              </ul>
-          </div>
-        </div>
+      <Memberships/>
     </div>
 
     <div class="col-8">
