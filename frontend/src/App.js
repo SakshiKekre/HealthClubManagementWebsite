@@ -18,7 +18,7 @@ const ClassView = lazy(() => import("./views/member/ClassesView"));
 const MemberActivities = lazy(() => import("../src/views/member/MyActivitiesView"));
 const MyProfile = lazy(() => import("../src/views/member/MyProfile"));
 const MemberAddActivity = lazy(() => import("../src/views/member/AddActivity"));
-
+const MemberSchedule = lazy(() => import("../src/views/member/MyScheduleView"))
 
 
 
@@ -50,7 +50,7 @@ function App() {
             <Route exact path="/member/activities" element={<MemberActivities/>} />
             <Route exact path="/member/MyProfile" element={<MyProfile/>} />
             <Route exact path="/member/AddActivity" element={<MemberAddActivity/>} />
-  
+            <Route exact path="/member/schedule" element={<MemberSchedule/>} />
           </Routes>
         </Suspense>
     

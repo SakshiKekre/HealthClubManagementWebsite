@@ -72,6 +72,9 @@ function handleLogout() {
           <NavLink exact to="/member/myprofile" activeClassName="activeClicked">
             <CDBSidebarMenuItem icon="columns">My Profile</CDBSidebarMenuItem>
           </NavLink>
+          <NavLink exact to="/member/schedule" activeClassName="activeClicked">
+            <CDBSidebarMenuItem icon="columns">My Schedule</CDBSidebarMenuItem>
+          </NavLink>
           <NavLink exact to="/member/classesView" activeClassName="activeClicked">
             <CDBSidebarMenuItem icon="table">Class Signup </CDBSidebarMenuItem>
           </NavLink>
