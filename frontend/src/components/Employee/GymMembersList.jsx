@@ -1,25 +1,9 @@
-import React from "react";
-import { useState, useEffect } from 'react';
-import { Field, reduxForm } from "redux-form";
+import React, { useState } from "react";
+import { reduxForm } from "redux-form";
 import { compose } from "redux";
-import { Link } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
 import { DataGrid } from '@mui/x-data-grid';
-import Button from '@mui/material/Button'
-import renderFormGroupField from "../../helpers/renderFormGroupField";
-import renderFormFileInput from "../../helpers/renderFormFileInput";
-import {
-  required,
-  maxLengthMobileNo,
-  minLengthMobileNo,
-  digit,
-  name,
-  email,
-} from "../../helpers/validation";
-import { Dropdown } from 'react-bootstrap';
 
 
-const LOCATIONS = ['San Jose', 'Fremont', 'San Francisco', 'Dublin'];
 const columns = [
   { field: 'registrationNumber', headerName: 'Member ID', width: 100 },
   { field: 'fname', headerName: 'Name', width: 130 },
@@ -27,34 +11,77 @@ const columns = [
   { field: 'phone', headerName: 'Phone', width: 100 },
   { field: 'location', headerName: 'Primary Location', width: 150 },
   { field: 'membershipStartDate', headerName: 'Date of Joining', width: 150 },
-  { field: 'membership_status', headerName: 'Status', width: 100 },
   {
     field: 'checkedIn',
     headerName: 'Checked In',
     width: 120,
     renderCell: (params) => {
-      return <CustomButton value={params.row.registrationNumber} />;
+      return <CustomButton value={[params.row.registrationNumber,params.row.enrolled]} />;
     },
   },
 ];
 
-// const rows = [
-//   { id: 1, name: 'John Doe',  email: 'john.doe@example.com', phone: '555-1234',location:'San Jose',doj:'2021-09-01',membership_status:'Active',checkedIn:false},
-//   { id: 2, name: 'Jane Doe',  email: 'jane.doe@example.com', phone: '555-5678',location:'San Jose',doj:'2021-09-01',membership_status:'Active',checkedIn:false},
-//   { id: 3, name: 'Bob Smith', email: 'bob.smith@example.com', phone: '555-9876',location:'San Jose',doj:'2021-09-01',membership_status:'Active',checkedIn:false},
-//   // add more rows as needed
-// ];
-
 function CustomButton({ value }) {
-  function handleClick() {
-    console.log('Button clicked:', value);
+
+  const [checkedInId, setCheckedInId] = useState(null);
+
+  const handleCheckin = (id) => {
+    if (checkedInId === null) {
+      setCheckedInId(id);
+
+      const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ "registrationNumber": id }),
+      };
+      fetch(process.env.REACT_APP_API_URL+'/checkinMember', requestOptions)
+      .then(response => {
+        if (response.ok) {
+          console.log('Checked in member successfully!');
+      //fetchData();
+        } else {
+          console.error('Error :', response.statusText);
+        }
+      })
+      .catch(error => console.error(error));
     // Add your custom onClick logic here
   }
+}
 
+const handleCheckout = (id) => {
+
+
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ "registrationNumber": id }),
+    };
+    fetch(process.env.REACT_APP_API_URL+'/checkoutMember', requestOptions)
+    .then(response => {
+      if (response.ok) {
+        console.log('Checked out member successfully!');
+    //fetchData();
+      } else {
+        console.error('Error :', response.statusText);
+      }
+    })
+    .catch(error => console.error(error));
+  // Add your custom onClick logic here
+}
+
+  
   return (
-    <button onClick={handleClick}>
+    <>
+    {value[1] ? (
+      <button onClick={handleCheckout(value[0])}>
+      Checkout
+    </button>
+    ) : (
+      <button onClick={handleCheckin(value[0])}>
       Checkin
     </button>
+    )}
+    </>
   );
 }
 
@@ -62,26 +89,19 @@ function GymMembersList() {
 
   const [searchResults, setSearchResults] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const location = useLocation();
-  const { history } = location;
-  const [checkedInId, setCheckedInId] = useState(null);
+ 
 
   const handleSearch = () => {
-    alert(`Searching for ${searchTerm}`)
-    const url = 'http://localhost:8080/healthclub/getMemberByID/'+searchTerm;
+    console.log(`Searching for ${searchTerm}`)
+    const url = process.env.REACT_APP_API_URL+'/getMemberByID/'+searchTerm;
     fetch(url)
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
-      setSearchResults(Array.from(data))
-    });
-    
-
-    // const results = rows.filter(row => {
-    //   return row.id.toString().includes(searchTerm) || row.email.includes(searchTerm);
-    // });
-    // setSearchResults(results);
-
+      const rowsWithCheckinStatus = data.map((row, index) => ({ id: index + 1, ...row, checkedIn: row.enrolled  }))
+      setSearchResults(rowsWithCheckinStatus);
+    })
+    .catch(error => console.error(error));
   };
 
   const handleClear = () => {
@@ -92,38 +112,8 @@ function GymMembersList() {
   const handleSearchTermChange = (event) => {
     setSearchTerm(event.target.value);
   };
-  const handleCheckin = (id) => {
-    if (checkedInId === null) {
-      setCheckedInId(id);
-      const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id: id }),
-      };
-      fetch('/checkin', requestOptions)
-        .then((response) => response.json())
-        .then((data) => console.log(data));
-    }
-  };
 
-  // const rowsWithCheckinStatus = searchResults.map((row) => {
-  //   return {
-  //     ...row,
-  //     checkedIn: row.id === checkedInId,
-  //   };
-  // });
-  const rowsWithCheckinStatus = searchResults.map((row) => {
-    return {
-      registrationNumber: row.registrationNumber,
-      fname: row.fname,
-      email: row.email,
-      phone: row.phone,
-      location: row.location,
-      membershipStartDate: row.membershipStartDate,
-      membership_status: row.membership.membershipType,
-      checkedIn: 'false',
-    };
-  });
+  
   return (
     <div>
     <div>
@@ -133,11 +123,10 @@ function GymMembersList() {
       </div>
 
     <div style={{ height: 400, width: '100%' }}>
-      <DataGrid rows={rowsWithCheckinStatus}
+      <DataGrid rows={searchResults}
         columns={columns}
         pageSize={5}
-        disableSelectionOnClick
-        onRowClick={(params) => console.log(`Row clicked: ${params.registrationNumber}`)}
+        
       />
     </div>
     </div>

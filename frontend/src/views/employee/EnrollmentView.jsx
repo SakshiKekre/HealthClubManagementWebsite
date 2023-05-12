@@ -2,25 +2,38 @@ import React, { lazy, Component } from "react";
 const EnrollForm = lazy(() => import("./../../components/account/EnrollmentForm"));
 const LeftNavigation = lazy(() => import("../../components/LeftNavigation"));
 
-const userName = "John";
-const userRole = "employee";
-
 
 
 class EnrollmentView extends Component {
   state = { imagePreview: "", isDeleting: false,success: false };
 
-
-
   onSubmitEnrollment = async (values) => {
-    alert(JSON.stringify(values));
+    console.log(JSON.stringify(values));
+    const [locationId, locationName] = values.locationId.split("-");
+    const jsonStructure = {
+      fname: values.fname,
+      userName: values.email,
+      password: values.password,
+      phone: values.phone,
+      email: values.email,
+      membershipStartDate:values.membershipStartDate,
+      location: {
+        locationID: locationId,
+        locationName: locationName,
+      },
+      membership: {
+        membershipType: values.membershipType,
+        validity: "90"
+      },
+      enrolled: false,
+    };
 
-    fetch('http://localhost:8080/healthclub/doRegister', {
+    fetch(process.env.REACT_APP_API_URL +'/healthclub/doRegister', {
     method: 'POST',
    headers: {
       'Content-Type': 'application/json'
     },
-   body: JSON.stringify(values)
+   body: JSON.stringify(jsonStructure)
   })
   .then(response => response.json())
   .then(data => {
@@ -36,17 +49,12 @@ class EnrollmentView extends Component {
 
 
   render() {
-    const initialValues = {
-      // Set the value of the hidden field
-      LocationId: "640bb00c57241540e9c129d7",
-      MembershipType: "basic",
-    };
 
     return (
       <div className="container-fluid my-3">
         <div className="row">
           <div className="col-md-2">
-            <LeftNavigation userName={userName} userRole={userRole}/>
+            <LeftNavigation />
           </div>
           <div className="col-md-6">
           <h4 className="text-center">Member Enrollment</h4>
@@ -56,7 +64,7 @@ class EnrollmentView extends Component {
               </div>
             ) : null
             }
-            <EnrollForm initialValues={initialValues}
+            <EnrollForm
               onSubmit={this.onSubmitEnrollment}
             />
           </div>

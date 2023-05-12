@@ -3,9 +3,6 @@ const GymMembersList = lazy(() => import("../../components/Employee/GymMembersLi
 const LeftNavigation = lazy(() => import("../../components/LeftNavigation"));
 
 
-const userName = "John";
-const userRole = "employee";
-
 class SearchMembersView extends Component {
   state = { imagePreview: "", isDeleting: false };
   
@@ -20,7 +17,7 @@ class SearchMembersView extends Component {
       <div className="container-fluid my-3">
         <div className="row">
         <div className="col-md-2">
-          <LeftNavigation userName={userName} userRole={userRole}/> 
+          <LeftNavigation /> 
           
           </div>
           <div className="col-md-6">
