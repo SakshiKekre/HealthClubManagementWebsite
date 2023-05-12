@@ -25,26 +25,47 @@ import { ReactComponent as IconPersonSquareFill } from "bootstrap-icons/icons/pe
 const AddActivityForm = (props) => {
   const { handleSubmit, submitting, onSubmit, submitFailed } = props;
 
-  const locations = {label:"SJ",value:"SJ"}
-  // const [response, setResponse] = useState([]);
-  // const [locations, setLocations] = useState([]);
+  // const locations = {label:"SJ",value:"SJ"}
+  const [response, setResponse] = useState([]);
+  const [locations, setLocations] = useState([]);
+  const [responseEqp, setResponseEqp] = useState([]);
+  const [equipment, setEquipment] = useState([]);
 
-  // useEffect(() => {
-  //   // Fetch all the memberships and set the state
-  //   const LocationAPI = process.env.REACT_APP_API_URL +"/findAllLocations";
-  //   fetch(LocationAPI)
-  //     .then(response => response.json())
-  //     .then(payload=>{setResponse(payload)})
-  //     .catch(error => console.error(error));
-  // },[]);
+  useEffect(() => {
+    // Fetch all the memberships and set the state
+    const LocationAPI = process.env.REACT_APP_API_URL +"/findAllLocations";
+    fetch(LocationAPI)
+      .then(response => response.json())
+      .then(payload=>{setResponse(payload)})
+      .catch(error => console.error(error));
+  },[]);
 
-  // useEffect(() => {
-  //   const locationOptions = response.map((location) => ({
-  //     label: location.locationName,
-  //     value: location.locationName,
-  //   }));
-  //   setLocations(locationOptions);
-  // },[response]);
+  useEffect(() => {
+    const locationOptions = response.map((location) => ({
+      label: location.locationName,
+      value: location.locationName,
+    }));
+    locationOptions.unshift({ label: "", value: "" });
+    setLocations(locationOptions);
+  },[response]);
+
+  useEffect(() => {
+    // Fetch all the memberships and set the state
+    const equipmentAPI = process.env.REACT_APP_API_URL +"/fetchAllMachines";
+    fetch(equipmentAPI)
+      .then(response => response.json())
+      .then(payload=>{setResponseEqp(payload)})
+      .catch(error => console.error(error));
+  },[]);
+
+  useEffect(() => {
+    const eqpOptions = responseEqp.map((machines) => ({
+      label: machines.machineName,
+      value: machines.machineName,
+    }));
+    eqpOptions.unshift({ label: "", value: "" });
+    setEquipment(eqpOptions);
+  },[responseEqp]);
 
   return (
     <form
@@ -57,7 +78,7 @@ const AddActivityForm = (props) => {
            <IconPersonSquareFill /> Add a new activity
          </h6>
          <ul className="list-group list-group-flush">
-           {/* <li className="list-group-item">
+           <li className="list-group-item">
              <Field
               name="location"
               type="text"
@@ -65,7 +86,7 @@ const AddActivityForm = (props) => {
               options={locations}
               label="Location"
               icon={IconPerson}
-              validate={[required, name]}
+              validate={[required]}
               required={true}
             />
           </li>
@@ -74,13 +95,13 @@ const AddActivityForm = (props) => {
               name="equipment"
               type="text"
               component={renderFormSelect}
-              options={locations}
+              options={equipment}
               label="Equipment"
               icon={IconPhone}
               validate={required}
               required={true}
             />
-          </li> */}
+          </li>
           <li className="list-group-item">
             <Field
               name="usageDate"

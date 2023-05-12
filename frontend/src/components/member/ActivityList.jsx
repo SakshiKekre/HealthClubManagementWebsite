@@ -38,7 +38,7 @@ function ActivityList() {
 
   useEffect(() => {
     // Fetch all the activities of member and set the state
-    const memberID = "4";
+    let memberID = localStorage.getItem('memberId');
     const getActivityAPI = process.env.REACT_APP_API_URL + "/getAllActivities/" + memberID;
     console.log("getActivityAPI API:" + getActivityAPI);
     fetch(getActivityAPI)
@@ -48,7 +48,7 @@ function ActivityList() {
         const width = 250
         // Assign columns
         setColumns([
-          { field: "id", headerName: "id", width: width },
+          // { field: "id", headerName: "id", width: width },
           { field: "location", headerName: "location", width: width },
           { field: "equipment", headerName: "equipment", width: width },
           { field: "activityPerformedDate", headerName: "Date", width: width },

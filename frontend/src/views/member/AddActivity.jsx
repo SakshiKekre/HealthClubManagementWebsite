@@ -8,28 +8,19 @@ function AddActivityView()  {
   const navigate = useNavigate();
 
   const onSubmit = async (values) => {
-    // const body = JSON.stringify(values)
-    
+
+    let memberID = localStorage.getItem('memberId');
     const requestBody = {
-      registrationNumber: '4',
+      registrationNumber: memberID,
       activityStartTime: values.startTime,
       activityEndTime: values.endTime,
-      activityPerformedDate: values.usageDate
+      activityPerformedDate: values.usageDate,
+      equipment: values.equipment,
+      location: values.location
     };
-// activityId: "645e000c15a2730cc2e99c5e"
-// activityPerformedDate: null
-// activityStartTime: null
-// activityType: null
-// equipment: null
-// location: null
-// registrationNumber: "4"
 
     console.log(JSON.stringify(values));
     console.log(JSON.stringify(requestBody));
-    console.log(values.usageDate);
-    console.log(values.startTime);
-    console.log(values.endTime);
-    // body.newProperty("registrationNumber:4");
     console.log('INSIDE SIBUMIT');
   
     const url = 'http://localhost:8080/healthclub/addActivity';
