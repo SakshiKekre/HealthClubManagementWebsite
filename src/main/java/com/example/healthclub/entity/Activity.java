@@ -24,7 +24,7 @@ public class Activity {
     @Getter@Setter
     private String activityEndTime;
     @Getter@Setter
-    private Location location;
+    private String location;
     @Getter@Setter
     private String equipment;
 
