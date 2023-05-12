@@ -46,7 +46,7 @@ function GymClassSchedule() {
         </Dropdown.Menu>
       </Dropdown>
       <div className="row mt-4">
-        <div className="col-md-6">
+        <div className="col-md-10">
           <div class="container">
 
             <h4>Class Schedule - {selectedLocation}</h4>
@@ -55,7 +55,12 @@ function GymClassSchedule() {
                 schedule.map((classSchedule) => (
                   <div className="card membership-block"> 
                     <li key={classSchedule.id}>
-                      {classSchedule.className} - {classSchedule.time}
+                      <ul className="list-unstyled">
+                        <li>Class: {classSchedule.className}</li>
+                        <li>Day & Time: {classSchedule.availableDays} - {classSchedule.timeSlots}</li>
+                        <li>Instructor: {classSchedule.instructor}</li>
+                        <li>Membership required: {classSchedule.membership}</li>
+                      </ul>
                     </li>
                   </div>
                 ))
@@ -66,15 +71,6 @@ function GymClassSchedule() {
               )}
             </ul>
           </div> 
-        </div>
-        <div className="col-md-6">
-          <h4>Class Instructors</h4>
-          <ul>
-            <li>John Doe - Yoga</li>
-            <li>Jane Doe - Pilates</li>
-            <li>Mike Smith - Zumba</li>
-            <li>Sarah Johnson - Spinning</li>
-          </ul>
         </div>
       </div>
     </div>
