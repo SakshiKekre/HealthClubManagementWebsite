@@ -39,11 +39,11 @@ public class RegistrationService {
     public List<Registration> fetchAllMembers() {
         return registrationRepo.findAll();
     }
-    public Registration getMemberByID(String regNumber) {
+    public List<Registration> getMemberByID(String regNumber) {
         return registrationRepo.findUserById(regNumber);
     }
 
-    public Registration getMemberByEmail(String email) {
+    public List<Registration> getMemberByEmail(String email) {
         return registrationRepo.findUserByEmail(email);
     }
 

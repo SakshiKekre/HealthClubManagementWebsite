@@ -24,7 +24,9 @@ public class EmployeeService {
     public String checkinMember(Registration registration,String checkinTime){
         //registration.setCheckinTime(checkinTime);
         Query query = new Query(Criteria.where("_id").is(registration.getRegistrationNumber()));
-        Update update = new Update().set("checkinTime", checkinTime);
+        Update update = new Update()
+        .set("checkinTime", checkinTime)
+        .set("enrolled", true);
         mongoTemplate.updateFirst(query, update, Registration.class);
 
         return "checkin time update success";
@@ -33,7 +35,9 @@ public class EmployeeService {
     public String checkoutMember (Registration registration,String checkoutTime) {
        // registration.setCheckoutTime(checkoutTime);
         Query query = new Query(Criteria.where("_id").is(registration.getRegistrationNumber()));
-        Update update = new Update().set("checkoutTime", checkoutTime);
+        Update update = new Update()
+        .set("checkoutTime", checkoutTime)
+        .set("enrolled", false);
         mongoTemplate.updateFirst(query, update, Registration.class);
         return "";
     }
