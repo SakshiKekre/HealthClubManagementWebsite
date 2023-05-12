@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { Field, reduxForm } from "redux-form";
 import { compose } from "redux";
 import renderFormGroupField from "../../helpers/renderFormGroupField";
+import renderFormSelect from "../../helpers/renderFormSelect";
 import renderFormFileInput from "../../helpers/renderFormFileInput";
 import {
   required,
@@ -12,16 +13,13 @@ import {
   name,
   email,
 } from "../../helpers/validation";
-import { Dropdown } from 'react-bootstrap';
+
 import { ReactComponent as IconPerson } from "bootstrap-icons/icons/person.svg";
 import { ReactComponent as IconPhone } from "bootstrap-icons/icons/phone.svg";
 import { ReactComponent as IconEnvelop } from "bootstrap-icons/icons/envelope.svg";
-import { ReactComponent as IconGeoAlt } from "bootstrap-icons/icons/geo-alt.svg";
 import { ReactComponent as IconCalendarEvent } from "bootstrap-icons/icons/calendar-event.svg";
-import { ReactComponent as IconPersonSquareFill } from "bootstrap-icons/icons/person-lines-fill.svg";
+import { ReactComponent as IconKeyFill } from "bootstrap-icons/icons/key-fill.svg";
 
-const LOCATIONS = ['San Jose', 'Fremont', 'San Francisco', 'Dublin'];
-const MEMBERSHIP_TYPES = ['Basic', 'Premium', 'Platinum'];
 
 const EnrollmentForm = (props) => {
   const {
@@ -29,51 +27,81 @@ const EnrollmentForm = (props) => {
     submitting,
     onSubmit,
     submitFailed,
-    onImageChange,
-    imagePreview,
   } = props;
-  //const [locations, setLocations] = useState(LOCATIONS);
-  //const [membershipTypes, setMembershipTypes] = useState(MEMBERSHIP_TYPES);
+
   const [locations, setLocations] = useState([]);
   const [membershipTypes, setMembershipTypes] = useState([]);
-  const [selectedLocation, setSelectedLocation] = useState(null);
-  const [selectedMembershipType, setSelectedMembershipType] = useState(null);
+  const [selectedLocationId, setSelectedLocationId] = useState("");
+  const [selectedLocationName, setSelectedLocationName] = useState("");
+  const [selectedMembershipType, setSelectedMembershipType] = useState("");
+  //const [initialValues, setInitialValues] = useState(props.initialValues);
+  
 
   
   useEffect(() => {
     // Fetch locations
-    fetch("http://localhost:8080/healthclub/findAllLocations")
+    fetch(process.env.REACT_APP_API_URL+"/findAllLocations")
       .then((response) => response.json())
-      .then((data) => setLocations(data));
+      .then((data) => {
+        const options = data.map((location) => ({
+          value: `${location.locationID}-${location.locationName}`,
+          label: location.locationName,
+        }));
+        setLocations(options);
+      });
 
     // Fetch membership types
-    fetch("http://localhost:8080/healthclub/getMembershipData")
+    fetch(process.env.REACT_APP_API_URL+"/getMembershipData")
       .then((response) => response.json())
-      .then((data) => setMembershipTypes(data));
+      .then((data) => {
+        const types = data.map((type) => ({
+          value: type.membershipType,
+          label: type.membershipType,
+        }));
+        setMembershipTypes(types);
+      });
+
   }, []);
 
-  const handleLocationDropdownChange = (location) => {
-    console.log(location);
-    setSelectedLocation(location);
-  }
 
-  const handleMembershipDropdownChange = (e) => {
-    console.log(e);
-    setSelectedMembershipType(e);
-  }
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
       className={`needs-validation ${submitFailed ? "was-validated" : ""}`}
       noValidate
     >
+
       <div className="card border-primary">
 
 
         <ul className="list-group list-group-flush">
+        <li className="list-group-item">
+            <Field
+              name="email"
+              type="email"
+              component={renderFormGroupField}
+              placeholder="Members email"
+              icon={IconEnvelop}
+              validate={[required, email]}
+              required={true}
+            />
+          </li>          
           <li className="list-group-item">
             <Field
-              name="name"
+              name="password"
+              type="password"
+              component={renderFormGroupField}
+              placeholder="Password"
+              icon={IconKeyFill}
+              validate={[required, maxLengthMobileNo, minLengthMobileNo]}
+              required={true}
+              max="999999999999999"
+              min="9999999"
+            />
+          </li>
+          <li className="list-group-item">
+            <Field
+              name="fname"
               type="text"
               component={renderFormGroupField}
               placeholder="Members name"
@@ -84,7 +112,7 @@ const EnrollmentForm = (props) => {
           </li>
           <li className="list-group-item">
             <Field
-              name="mobileNo"
+              name="phone"
               type="number"
               component={renderFormGroupField}
               placeholder="Mobile no"
@@ -95,17 +123,7 @@ const EnrollmentForm = (props) => {
               min="9999"
             />
           </li>
-          <li className="list-group-item">
-            <Field
-              name="email"
-              type="email"
-              component={renderFormGroupField}
-              placeholder="Members email"
-              icon={IconEnvelop}
-              validate={[required, email]}
-              required={true}
-            />
-          </li>
+
           <li className="list-group-item">
             {/* <Field
               name="location"
@@ -116,39 +134,48 @@ const EnrollmentForm = (props) => {
               validate={[required]}
               required={true}
             /> */}
-        <Dropdown>
+        {/* <Dropdown>
         <Dropdown.Toggle variant="secondary">
-          {selectedLocation ? selectedLocation : 'Select Primary Location'}
+          {selectedLocationName ? selectedLocationName : 'Select Primary Location'}
           
-          <input type="hidden" name="LocationId" value={selectedLocation} />
         </Dropdown.Toggle>
         <Dropdown.Menu >
           {locations.map(location => (
-            <Dropdown.Item key={location.locationID} eventKey={location.locationID} value = {location.locationID  } >
+            <Dropdown.Item key={location.locationID} eventKey={location.locationID} value = {location.locationID} onClick={() => handleLocationDropdownChange(location.locationID,location.locationName)} >
               {location.locationName}
             </Dropdown.Item>
           ))}
         </Dropdown.Menu>
-      </Dropdown>
+      </Dropdown> */}
+  {/* <Form.Control as="select" name="locationId" value={selectedLocationId} onChange={(e) => handleLocationSelectChange(e.target.value)}>
+  <option value="">Select Primary Location</option>
+  {locations.map(location => (
+    <option key={location.locationID} value={location.locationID}>{location.locationName}</option>
+  ))}
+</Form.Control> */}
+
+<Field
+  name="locationId"
+  component={renderFormSelect}
+  options={locations}
+  label="Select a Location"
+  required={true}
+/>
+
       <br/>
-      <Dropdown>
-        <Dropdown.Toggle variant="secondary">
-          {selectedMembershipType ? selectedMembershipType : 'Select Membership Type'}
-        </Dropdown.Toggle>
-    
-        <Dropdown.Menu >
-          {membershipTypes.map(membershipType => (
-            <Dropdown.Item key={membershipType.membershipType} eventKey={membershipType.membershipType}  value={membershipType.membershipType} onClick={() => handleMembershipDropdownChange(membershipType.membershipType)}>
-              {membershipType.membershipType}
-            </Dropdown.Item>
-          ))}
-        </Dropdown.Menu>
-      </Dropdown>
+  
+<Field
+  name="membershipType"
+  component={renderFormSelect}
+  options={membershipTypes}
+  label="Select a Membership Type"
+  required={true}
+/>
           </li>
           <li className="list-group-item">
           <h6 className="text-center">Membership StartDate</h6>
             <Field
-              name="startDate"
+              name="membershipStartDate"
               type="date"
               component={renderFormGroupField}
               placeholder="Start Date of Membership"
@@ -161,7 +188,6 @@ const EnrollmentForm = (props) => {
         <div className="card-body">
           <button
             type="submit"
-            className="btn btn-primary  d-flex"
             disabled={submitting}
           >
             Submit

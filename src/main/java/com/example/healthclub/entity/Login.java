@@ -9,7 +9,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Login {
 
 
-    @Id
     @Getter@Setter
     private String userName;
     @Getter@Setter

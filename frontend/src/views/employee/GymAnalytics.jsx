@@ -67,16 +67,6 @@ const visitorsData_1 = [
 ];
 
 
-
-
-
-
-
-const userName = "John";
-const userRole = "employee";
-
-
-
 const GymAnalytics = () => {
 
   const [userActivityData, setUserActivityData] = useState([]);
@@ -133,7 +123,7 @@ const GymAnalytics = () => {
       <div className="container-fluid my-3">
       <div className="row">
         <div className="col-md-2">
-          <LeftNavigation userName={userName} userRole={userRole}/>
+          <LeftNavigation />
         </div>
         <div className="col-md-5">
       <VictoryChart domainPadding={20} theme={VictoryTheme.material}

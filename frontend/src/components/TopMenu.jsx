@@ -74,26 +74,6 @@ const TopMenu = () => {
                 </li>
               </ul>
             </li> */}
-            <li className="nav-item">
-              <Link className="nav-link" to="/category">
-                Memberships
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/category">
-                Locations
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/category">
-                About Us
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/category">
-                Blogs
-              </Link>
-            </li>
           </ul>
         </div>
       </div>

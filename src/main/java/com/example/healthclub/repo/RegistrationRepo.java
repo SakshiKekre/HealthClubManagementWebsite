@@ -34,8 +34,8 @@ public interface RegistrationRepo extends MongoRepository<Registration,String> {
     List<RegistrationByYear> countOrdersByYear();
 
     @Query("{_id:'?0'}")
-    Registration findUserById(String id);
+    List<Registration> findUserById(String id);
     @Query("{email:'?0'}")
-    Registration findUserByEmail(String email);
+    List<Registration> findUserByEmail(String email);
 
 }

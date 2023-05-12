@@ -54,18 +54,17 @@ public class HealthClubController {
     @GetMapping("/login/{username}/{password}")
     public Object verifyUser(@PathVariable String username, @PathVariable String password) {
         System.out.println("login");
-       // loginRepo.addUser("admin1","admin1","admin");
         Login log = loginService.findUserByName(username);
         if(log!=null) {
             if(password.equals(log.getPassword())) {
                 return log;
             }
             else {
-                return "wrong cred";
+                return new ResponseEntity<>("{\"error\": \"Invalid:Wrong credentials\"}", HttpStatus.UNAUTHORIZED);
             }
         }
         else {
-            return "wrong cred";
+            return new ResponseEntity<>("{\"error\": \"Invalid:Unable to locate user\"}", HttpStatus.UNAUTHORIZED);
         }
     }
 
@@ -117,12 +116,12 @@ public class HealthClubController {
         return registrationService1.fetchAllMembers();
     }
     @GetMapping("/getMemberByID/{regNumber}")
-    public Registration getMemberByID(@PathVariable String regNumber){
+    public List<Registration> getMemberByID(@PathVariable String regNumber){
         return registrationService1.getMemberByID(regNumber);
     }
 
     @GetMapping("/getMemberByEmail/{email}")
-    public Registration getMemberByEmail(@PathVariable String email ){
+    public List<Registration> getMemberByEmail(@PathVariable String email ){
         return registrationService1.getMemberByEmail(email);
     }
 
@@ -274,8 +273,8 @@ public class HealthClubController {
     /// to check if the user has checked in or not
     @GetMapping("/isCheckedin")
     public boolean isCheckedin(@RequestParam String email){
-        Registration user = registrationService.findUserByEmail(email);
-        if(user.getCheckinDate().compareTo(user.getCheckoutDate())>0)
+        List<Registration> user = registrationService.findUserByEmail(email);
+        if(user.get(0).getCheckinDate().compareTo(user.get(0).getCheckoutDate())>0)
             return true;
         return false;
     }
@@ -358,17 +357,17 @@ public class HealthClubController {
 
 
 
-    @GetMapping("/classEnrollAnalyticsByWeek")
-    public HashMap<Integer, Integer> classEnrollByWeek(){
-        HashMap<Integer, Integer> map = new HashMap<>();
-        List<RegistrationByWeek> weekCounts = registrationService.countOrdersByWeek();
-        for (RegistrationByWeek weekCount : weekCounts) {
-            System.out.println("Week " + weekCount.getWeek() + ": " + weekCount.getCountWeek() + " orders");
-            map.put(weekCount.getWeek(), weekCount.getCountWeek());
+    // @GetMapping("/classEnrollAnalyticsByWeek")
+    // public HashMap<Integer, Integer> classEnrollByWeek(){
+    //     HashMap<Integer, Integer> map = new HashMap<>();
+    //     List<RegistrationByWeek> weekCounts = registrationService.countOrdersByWeek();
+    //     for (RegistrationByWeek weekCount : weekCounts) {
+    //         System.out.println("Week " + weekCount.getWeek() + ": " + weekCount.getCountWeek() + " orders");
+    //         map.put(weekCount.getWeek(), weekCount.getCountWeek());
 
-        }
-        return map;
-    }
+    //     }
+    //     return map;
+    // }
 
     @GetMapping("/classEnrollAnalyticsByYear")
     public HashMap<Integer, Integer> classEnrollByYear(){

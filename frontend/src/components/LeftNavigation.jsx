@@ -7,13 +7,32 @@ import {
   CDBSidebarMenu,
   CDBSidebarMenuItem,
 } from 'cdbreact';
-import { NavLink } from 'react-router-dom';
+import { NavLink, BrowserRouter, useNavigate } from 'react-router-dom';
+
 
 const LeftNavigation = (props) => {
-const { userName, userRole } = props;
-// const path = window.location.pathname;
-// const isMember = path.includes("/member");
-// const isEmployee = path.includes("/employee");
+//const { userName, userRole } = props;
+let isUserLoggedIn = localStorage.getItem('isLoggedIn');
+let userName = localStorage.getItem('userName');
+let userRole = localStorage.getItem('userType');
+
+const navigate = useNavigate();
+
+function handleLogout() {
+  localStorage.removeItem('isLoggedIn');
+  localStorage.removeItem('userName');
+  localStorage.removeItem('userType');
+  localStorage.removeItem('memberId');
+  window.location = process.env.REACT_APP_HOME_URL;
+}
+
+// const handleLogout = () => {
+//   localStorage.removeItem('isLoggedIn');
+//   localStorage.removeItem('userName');
+//   localStorage.removeItem('userType');
+//   localStorage.removeItem('memberId');
+//   navigate('/');
+// };
 
 
 
@@ -29,20 +48,18 @@ const { userName, userRole } = props;
 
         <CDBSidebarContent className="sidebar-content">
           <CDBSidebarMenu>
-            <NavLink exact to="/" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="columns">My Profile</CDBSidebarMenuItem>
-            </NavLink>
-            <NavLink exact to="/tables" activeClassName="activeClicked">
+
+            <NavLink exact to="/employee/enrollmember" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="table">Enroll New Members </CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/profile" activeClassName="activeClicked">
+            <NavLink exact to="/employee/searchmembers" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="user">Manage Members</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/analytics" activeClassName="activeClicked">
+            <NavLink exact to="/employee/viewanalytics" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="chart-line">Analytics</CDBSidebarMenuItem>
             </NavLink>
 
-            <NavLink exact to="/hero404" target="_blank" activeClassName="activeClicked">
+            <NavLink exact onClick={handleLogout} target="_blank" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="exclamation-circle">Logout</CDBSidebarMenuItem>
             </NavLink>
           </CDBSidebarMenu>
@@ -52,16 +69,16 @@ const { userName, userRole } = props;
 
       <CDBSidebarContent className="sidebar-content">
         <CDBSidebarMenu>
-          <NavLink exact to="/" activeClassName="activeClicked">
+          <NavLink exact to="/member/myprofile" activeClassName="activeClicked">
             <CDBSidebarMenuItem icon="columns">My Profile</CDBSidebarMenuItem>
           </NavLink>
-          <NavLink exact to="/tables" activeClassName="activeClicked">
+          <NavLink exact to="/member/classesView" activeClassName="activeClicked">
             <CDBSidebarMenuItem icon="table">Class Signup </CDBSidebarMenuItem>
           </NavLink>
-          <NavLink exact to="/profile" activeClassName="activeClicked">
+          <NavLink exact to="/member/activities" activeClassName="activeClicked">
             <CDBSidebarMenuItem icon="user">My Activities</CDBSidebarMenuItem>
           </NavLink>
-          <NavLink exact to="/analytics" activeClassName="activeClicked">
+          <NavLink exact onClick={handleLogout} activeClassName="activeClicked">
             <CDBSidebarMenuItem icon="exclamation-circle">Logout</CDBSidebarMenuItem>
           </NavLink>
 
@@ -75,11 +92,11 @@ const { userName, userRole } = props;
               padding: '20px 5px',
             }}
           >
-            Sidebar Footer
           </div>
         </CDBSidebarFooter>
       </CDBSidebar>
     </div>
+ 
   );
 };
 
