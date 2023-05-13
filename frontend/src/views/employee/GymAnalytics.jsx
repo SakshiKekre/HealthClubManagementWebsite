@@ -1,71 +1,43 @@
 import React, { lazy, Component } from "react";
 import {useState, useEffect} from 'react';
 
-import { VictoryChart, VictoryBar, VictoryLine, VictoryAxis, VictoryLegend,VictoryTheme,VictoryContainer,VictoryLabel } from "victory";
+import { VictoryPie, VictoryChart, VictoryBar, VictoryLine, VictoryAxis, VictoryLegend,VictoryTheme,VictoryContainer,VictoryLabel } from "victory";
 
 const LeftNavigation = lazy(() => import("../../components/LeftNavigation"));
 
 
 const userActivityData_1 = [
-  { location: "Gym 1", userActivity: 200 },
-  { location: "Gym 2", userActivity: 300 },
-  { location: "Gym 3", userActivity: 150 },
-  { location: "Gym 4", userActivity: 100 },
+  { x: "San Jose", y: 200 },
+  { x: "Fremont", y: 300 },
+  { x: "San Francisco", y: 150 },
+  { x: "Dublin", y: 100 },
 ];
 
 const classesData_1 = [
-  { day: "Mon", classes: 10 },
-  { day: "Tue", classes: 15 },
-  { day: "Wed", classes: 20 },
-  { day: "Thu", classes: 15 },
-  { day: "Fri", classes: 10 },
-  { day: "Sat", classes: 5 },
-  { day: "Sun", classes: 2 },
+  { day: "Mon", classes: 20 },
+  { day: "Tue", classes: 19 },
+  { day: "Wed", classes: 18 },
+  { day: "Thu", classes: 20 },
+  { day: "Fri", classes: 17 },
+  { day: "Sat", classes: 10 },
+  { day: "Sun", classes: 8 },
 ];
 
 const enrollmentData_1 = [
-  { day: "Mon", enrollment: 50 },
-  { day: "Tue", enrollment: 60 },
-  { day: "Wed", enrollment: 70 },
-  { day: "Thu", enrollment: 60 },
-  { day: "Fri", enrollment: 50 },
-  { day: "Sat", enrollment: 30 },
-  { day: "Sun", enrollment: 20 },
+  { day: "Mon", enrollment: 20 },
+  { day: "Tue", enrollment: 20 },
+  { day: "Wed", enrollment: 20 },
+  { day: "Thu", enrollment: 20 },
+  { day: "Fri", enrollment: 20 },
+  { day: "Sat", enrollment: 10 },
+  { day: "Sun", enrollment: 10 },
 ];
 
 const hoursSpentData_1 = [
-  { time: "Day", hoursSpent: 500 },
-  { time: "Week", hoursSpent: 3500 },
-  { time: "Month", hoursSpent: 15000 },
+  { time: "Day", hoursSpent: 20 },
+  { time: "Week", hoursSpent: 100 },
+  { time: "Month", hoursSpent: 300 },
 ];
-
-const visitorsData_1 = [
-  { hour: "00:00", weekday: 50, weekend: 75 },
-  { hour: "01:00", weekday: 40, weekend: 60 },
-  { hour: "02:00", weekday: 30, weekend: 45 },
-  { hour: "03:00", weekday: 20, weekend: 30 },
-  { hour: "04:00", weekday: 10, weekend: 15 },
-  { hour: "05:00", weekday: 5, weekend: 10 },
-  { hour: "06:00", weekday: 10, weekend: 20 },
-  { hour: "07:00", weekday: 20, weekend: 30 },
-  { hour: "08:00", weekday: 40, weekend: 60 },
-  { hour: "09:00", weekday: 50, weekend: 75 },
-  { hour: "10:00", weekday: 70, weekend: 100 },
-  { hour: "11:00", weekday: 80, weekend: 120 },
-  { hour: "12:00", weekday: 100, weekend: 150 },
-  { hour: "13:00", weekday: 120, weekend: 180 },
-  { hour: "14:00", weekday: 140, weekend: 200 },
-  { hour: "15:00", weekday: 160, weekend: 230 },
-  { hour: "16:00", weekday: 180, weekend: 260 },
-  { hour: "17:00", weekday: 200, weekend: 300 },
-  { hour: "18:00", weekday: 220, weekend: 330 },
-  { hour: "19:00", weekday: 240, weekend: 360 },
-  { hour: "20:00", weekday: 260, weekend: 390 },
-  { hour: "21:00", weekday: 280, weekend: 420 },
-  { hour: "22:00", weekday: 300, weekend: 450 },
-  { hour: "23:00", weekday: 320, weekend: 480 },
-];
-
 
 const GymAnalytics = () => {
 
@@ -81,7 +53,7 @@ const GymAnalytics = () => {
     fetchClassesData();
     //fetchEnrollmentData();
     fetchHoursSpentData();
-    fetchVisitorsData();
+//     fetchVisitorsData();
   }, []);
 
   const fetchUserActivityData = async () => {
@@ -111,13 +83,13 @@ const GymAnalytics = () => {
     setHoursSpentData(hoursSpentData_1);
   };
 
-  const fetchVisitorsData = async () => {
-    // Fetch number of visitors data by the hour each day, weekday, weekend
-    // const response = await fetch("/api/visitors");
-    // const data = await response.json();
-    // setVisitorsData(data);
-    setVisitorsData(visitorsData_1);
-  };
+//   const fetchVisitorsData = async () => {
+//     // Fetch number of visitors data by the hour each day, weekday, weekend
+//     // const response = await fetch("/api/visitors");
+//     // const data = await response.json();
+//     // setVisitorsData(data);
+//     setVisitorsData(visitorsData_1);
+//   };
 
     return (
       <div className="container-fluid my-3">
@@ -125,49 +97,74 @@ const GymAnalytics = () => {
         <div className="col-md-2">
           <LeftNavigation />
         </div>
-        <div className="col-md-5">
-      <VictoryChart domainPadding={20} theme={VictoryTheme.material}
-          text="Gym Checkins for the Last Week" containerComponent={<VictoryContainer style={{ height: "50%",width:"100%" ,padding: 0 }} />}>
-            <VictoryAxis/>
-        <VictoryLabel text="Activity data summarized by location" x={225} y={30} textAnchor="middle"/>
-        <VictoryAxis dependentAxis />
-        <VictoryBar data={userActivityData} x="location" y="userActivity" />
-      </VictoryChart>
-      </div>
+
         <div className="col-md-5">
        {/* Classes and enrollment chart */}
-       <VictoryChart domainPadding={20} theme={VictoryTheme.material}
+       <VictoryChart domainPadding={20}
           text="Gym Checkins for the Last Week" containerComponent={<VictoryContainer style={{ height: "50%",width:"100%" ,padding: 0 }} />}>
-        <VictoryLabel text="classes and enrollment data by day/week" x={225} y={30} textAnchor="middle"/>
+        <VictoryLabel text="Number of classes and full enrollment by Last Week" x={225} y={30} textAnchor="middle"/>
         <VictoryAxis />
         <VictoryAxis dependentAxis />
-        <VictoryLegend x={200} y={70}
-          title="Legend"
-          centerTitle
-          orientation="horizontal"
-          gutter={20}
-          style={{ border: { stroke: "black" }, title: { fontSize: 10 } }}
-          data={[
-            { name: "Classes", symbol: { fill: "blue" } },
-            { name: "Enrollment", symbol: { fill: "green" } }
-          ]}
-        />
+        <VictoryLegend
+                  x={300}
+                  y={70}
+                  title="Legend"
+                  centerTitle
+                  orientation="horizontal"
+                  style={{
+                    border: { stroke: "black" },
+                    title: { fontSize: 10 }, // reduce font size of the title
+                    labels: { fontSize: 8 } // reduce font size of the legend items
+                  }}
+                  data={[    { name: "Classes", symbol: { fill: "blue" } },    { name: "Enrollment", symbol: { fill: "green" } }  ]}
+                />
         <VictoryLine data={classesData} x="day" y="classes" style={{ data: { stroke: "blue" } }} />
         <VictoryLine data={enrollmentData} x="day" y="enrollment" style={{ data: { stroke: "green" } }} />
-      </VictoryChart>
+        </VictoryChart>
 
-        
-      {/* Hours spent chart */}
-      <VictoryChart domainPadding={20} theme={VictoryTheme.material} containerComponent={<VictoryContainer style={{ height: "50%",width:"100%" ,padding: 0 }} />}>
-      <VictoryLabel text="Hours spent by Day/Week/Month" x={225} y={30} textAnchor="middle"/>
-        <VictoryAxis />
-        <VictoryAxis dependentAxis />
+      <VictoryChart domainPadding={20}  containerComponent={<VictoryContainer style={{ height: "50%",width:"100%" ,padding: 0 }} />}>
+      <VictoryAxis label="Day/Week/Month" labelPlacement="parallel"
+                              style={{ fontFamily: "Arial",
+                                            axisLabel: { padding: 30 }
+                                          }}/>
+
+      <VictoryLabel text="Avg Hours spent by Day/Week/Month" x={225} y={30} textAnchor="middle"/>
+        <VictoryAxis dependentAxis label="Hours spent in gym" labelPlacement="parallel"
+                                style={{
+                                    axisLabel: { padding: 40 }
+                                  }}/>
         <VictoryBar data={hoursSpentData} x="time" y="hoursSpent" />
       </VictoryChart>
-
-
-
         </div>
+          <div className="col-md-4">
+{/*               <VictoryChart domainPadding={20} */}
+{/*                         containerComponent={<VictoryContainer style={{ height: "100%", width: "100%", padding: 0 }} />} */}
+{/*                       > */}
+{/*                         <VictoryAxis label="Location" labelPlacement="parallel" */}
+{/*                         style={{ */}
+{/*                                       axisLabel: { padding: 30 } */}
+{/*                                     }}/> */}
+{/*                         <VictoryLabel text="Number of gym checking last week" x={150} y={30} textAnchor="middle" /> */}
+{/*                         <VictoryAxis dependentAxis label="User Activity(hrs)" labelPlacement="parallel" */}
+{/*                         style={{ */}
+{/*                             axisLabel: { padding: 40 } */}
+{/*                           }}/> */}
+{/*                         <VictoryBar data={userActivityData} x="location" y="userActivity" /> */}
+{/*                       </VictoryChart> */}
+{/* Hours spent chart */}
+<div width={300} height={300}>
+<h4 style={{ fontFamily: "Arial"}} >Gym Checkins for the Last Week</h4>
+      <VictoryPie
+        data={userActivityData}
+        labelRadius={70}
+        style={{ labels: { fontSize: 10 } }}
+        labels={({ datum }) => `${datum.x}: ${datum.y}`}
+        innerRadius={120}
+        padding={{ top: 10, bottom: 10 }}
+      ></VictoryPie>
+      </div>
+              </div>
+
 
       </div>
     </div>
