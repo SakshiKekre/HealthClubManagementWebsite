@@ -27,6 +27,7 @@ const EnrollmentForm = (props) => {
     submitting,
     onSubmit,
     submitFailed,
+    reset
   } = props;
 
   const [locations, setLocations] = useState([]);
@@ -62,6 +63,11 @@ const EnrollmentForm = (props) => {
       });
 
   }, []);
+
+  const handleClear = () => {
+    reset();
+    
+  };
 
 
   return (
@@ -191,6 +197,10 @@ const EnrollmentForm = (props) => {
             disabled={submitting}
           >
             Submit
+          </button>
+          
+          <button type="button" onClick={handleClear}>
+            Clear
           </button>
         </div>
       </div>

@@ -9,7 +9,7 @@ const columns = [
   { field: 'fname', headerName: 'Name', width: 130 },
   { field: 'email', headerName: 'Email', width: 130 },
   { field: 'phone', headerName: 'Phone', width: 100 },
-  { field: 'location', headerName: 'Primary Location', width: 150 },
+  { field: 'locationname', headerName: 'Primary Location', width: 150 },
   { field: 'membershipStartDate', headerName: 'Date of Joining', width: 150 },
   {
     field: 'checkedIn',
@@ -98,12 +98,26 @@ function GymMembersList() {
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
-      const rowsWithCheckinStatus = data.map((row, index) => ({ id: index + 1, ...row, checkedIn: row.enrolled  }))
+      // const rowsWithCheckinStatus = data.map((row, index) => ({ id: index + 1, ...row, checkedIn: row.enrolled  }))
+      const rowsWithCheckinStatus = data.map((row, index) => ({
+        id: index + 1,
+        ...row,
+        checkedIn: row.enrolled,
+        locationname: row.location?.locationName || null,
+        membershipStartDate: formatDate(row.membershipStartDate),
+      }));
       setSearchResults(rowsWithCheckinStatus);
     })
     .catch(error => console.error(error));
   };
 
+
+const formatDate = (dateString) => {
+  if (!dateString) return null; // return null if dateString is null or undefined
+  const date = new Date(dateString);
+  const options = { month: 'short', day: 'numeric', year: 'numeric' };
+  return date.toLocaleDateString('en-US', options);
+}
   const handleClear = () => {
     setSearchTerm('');
     setSearchResults([]);
