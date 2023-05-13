@@ -23,8 +23,8 @@ npm start
 
 ### Note: 
 - Make changes to these files before running the project
-[.env](https://github.com/gopinathsjsu/team-project-logic-legion/tree/main/frontend#:~:text=2%20days%20ago-,.env,-(File)) : add the backend Endpoint - (http://localhost:8080/healthclub)
-- application.properties : add mongodb uri and database name
+[.env](https://github.com/gopinathsjsu/team-project-logic-legion/blob/main/frontend/.env) : add the backend Endpoint - (http://localhost:8080/healthclub)
+- [application.properties](https://github.com/gopinathsjsu/team-project-logic-legion/blob/main/src/main/resources/application.properties) : add mongodb uri and database name
 
 ## Summary of the Contributions
 1. Naga (Scrum Master) - WireFrames, architecture, frontend
@@ -63,4 +63,13 @@ Communication: To make sure that everyone was aware of the project's requirement
 Courage: From the first meeting, a space was created to allow for open conversations. We utilized the resources and abilities that we all possessed to the fullest extent while also continuously developing each of our skill sets. We spoke extensively about technology and architecture. While discussing the best approach, we spent time strengthening our understanding. We developed a bond where, each person was free to propose the finest ideas that would be useful.
 
 ## Documentation
+
+1. Usecase Diagram:
+![useCAse](https://github.com/gopinathsjsu/team-project-logic-legion/assets/112213523/7bcc1c62-bb18-435c-bb18-f65a91d18b89)
+
+2. Architecture Diagram:
+![archi](https://github.com/gopinathsjsu/team-project-logic-legion/assets/112213523/a36b2789-378a-48f7-949d-e6fe9bef8fb3)
+
+3. Database Diagram:
+![202_DB_model drawio](https://github.com/gopinathsjsu/team-project-logic-legion/assets/112213523/293ffa02-4770-4ba1-b63b-fdf18d682258)
 
