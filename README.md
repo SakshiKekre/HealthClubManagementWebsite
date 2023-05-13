@@ -1,9 +1,9 @@
 # team-project-logic-legion
 
 ## Team Members
-1. Naga Bathula (016734484)
+1. Naga Bathula(016734484)
 2. Ujwala Mote(016711396)
-3. Sakshi Kekre
+3. Sakshi Kekre(015970500)
 4. Chinmayi Sunku(011672851)
 
 ## Steps to run the application
@@ -70,11 +70,12 @@ Courage: From the first meeting, a space was created to allow for open conversat
 - [Link to your team's Project Journal](https://github.com/gopinathsjsu/team-project-logic-legion/tree/d804512a8261d2e2661111258ba10ffa78082299/journals)
 - [Link to your team's Google Sprint Task Sheet](https://docs.google.com/spreadsheets/d/1Zfyc6sH8DOkpihwRDR8lI0Yy3aAtoVIyzdvgTdSw42M/edit?usp=sharing)
 - [Demo URL](http://llhealthclub.placeholders.online/)
+- [Wireframe mockups](https://github.com/gopinathsjsu/team-project-logic-legion/edit/main/README.md#:~:text=Chinmayi-,LL_Healthclub_Mockups,-.pdf)
 
 ## Documentation
 
 1. Usecase Diagram:
-![WhatsApp Image 2023-05-12 at 11 05 37 PM](https://github.com/gopinathsjsu/team-project-logic-legion/assets/112213523/741c8338-bd59-414f-ac9f-48e0cf68c2fa)
+![WhatsApp Image 2023-05-13 at 9 38 37 AM](https://github.com/gopinathsjsu/team-project-logic-legion/assets/112213523/595c2edc-b39b-49ed-b27d-dbc131749540)
 
 2. Architecture Diagram:
 ![WhatsApp Image 2023-05-12 at 10 55 33 PM](https://github.com/gopinathsjsu/team-project-logic-legion/assets/112213523/0d348f80-604c-4cc5-8ef1-ff07cdf5a122)
