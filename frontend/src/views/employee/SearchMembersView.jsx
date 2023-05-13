@@ -20,7 +20,7 @@ class SearchMembersView extends Component {
           <LeftNavigation /> 
           
           </div>
-          <div className="col-md-6">
+          <div className="col-md-8">
           <h4 className="text-center">Search Members</h4>
             <GymMembersList
               onSubmit={this.onSubmit}

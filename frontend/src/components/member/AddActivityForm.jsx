@@ -139,7 +139,6 @@ const AddActivityForm = (props) => {
         <div className="card-body d-flex justify-content-center">
           <button
             type="submit"
-            className="btn btn-primary"
             style={{ marginRight: '0.5rem' }}
 
             disabled={submitting}
@@ -149,7 +148,6 @@ const AddActivityForm = (props) => {
           <Link to="/member/activities">
             <button
               // type="cancel"
-              className="btn btn-primary"
               style={{ marginRight: '0.5rem' }}
               disabled={submitting}
             >

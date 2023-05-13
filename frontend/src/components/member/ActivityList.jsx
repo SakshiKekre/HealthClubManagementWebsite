@@ -78,8 +78,8 @@ function ActivityList() {
     <div style={{ height: 400, width: '100%' }}>
       <div>
         <input type="text" placeholder="Search by equipment name" value={searchTerm} onChange={handleSearchTermChange} />
-        <Button onClick={handleSearch}>Search</Button>
-        <Button onClick={handleClear}>Clear</Button>
+        <button onClick={handleSearch}>Search</button>
+        <button onClick={handleClear}>Clear</button>
       </div>
       <div style={{ height: 400, width: '100%' }}>
         <DataGrid rows={searchResults}

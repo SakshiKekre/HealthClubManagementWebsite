@@ -1,10 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { reduxForm } from "redux-form";
 import { compose } from "redux";
 import { DataGrid } from '@mui/x-data-grid';
 
 
 const columns = [
+  { field: 'registrationNumber', headerName: 'Member ID', width: 100 },
+  { field: 'fname', headerName: 'Name', width: 130 },
+  { field: 'email', headerName: 'Email', width: 130 },
+  { field: 'phone', headerName: 'Phone', width: 100 },
+  { field: 'locationname', headerName: 'Primary Location', width: 150 },
+  { field: 'membershipStartDate', headerName: 'Date of Joining', width: 150 },
+  // {
+  //   field: 'checkedIn',
+  //   headerName: 'Checked In',
+  //   width: 120,
+  //   renderCell: (params) => {
+  //     return <CustomButton value={[params.row.registrationNumber,params.row.enrolled]} />;
+  //   },
+  // },
+];
+
+const columns2 = [
   { field: 'registrationNumber', headerName: 'Member ID', width: 100 },
   { field: 'fname', headerName: 'Name', width: 130 },
   { field: 'email', headerName: 'Email', width: 130 },
@@ -20,6 +37,7 @@ const columns = [
     },
   },
 ];
+
 
 function CustomButton({ value }) {
 
@@ -89,6 +107,7 @@ function GymMembersList() {
 
   const [searchResults, setSearchResults] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [cols, setCols] = useState(columns);
  
 
   const handleSearch = () => {
@@ -97,6 +116,7 @@ function GymMembersList() {
     fetch(url)
     .then((response) => response.json())
     .then((data) => {
+      setCols(columns2);
       console.log(data);
       // const rowsWithCheckinStatus = data.map((row, index) => ({ id: index + 1, ...row, checkedIn: row.enrolled  }))
       const rowsWithCheckinStatus = data.map((row, index) => ({
@@ -128,6 +148,27 @@ const formatDate = (dateString) => {
   };
 
   
+  useEffect(() => {
+    const url = process.env.REACT_APP_API_URL+'/fetchAllMembers';
+    fetch(url)
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+      
+      setSearchResults(data);
+      // const rowsWithCheckinStatus = data.map((row, index) => ({ id: index + 1, ...row, checkedIn: row.enrolled  }))
+      // const rows = data.map((row, index) => ({
+      //   id: index + 1,
+      //   ...row,
+      //   checkedIn: row.enrolled,
+      //   locationname: row.location?.locationName || null,
+      //   membershipStartDate: formatDate(row.membershipStartDate),
+      // }));
+      // setSearchResults(rowsWithCheckinStatus);
+    })
+    .catch(error => console.error(error));
+  },[])
+
   return (
     <div>
     <div>
@@ -137,8 +178,8 @@ const formatDate = (dateString) => {
       </div>
 
     <div style={{ height: 400, width: '100%' }}>
-      <DataGrid rows={searchResults}
-        columns={columns}
+      <DataGrid getRowId={(searchResults) => searchResults.registrationNumber} rows={searchResults}
+        columns={cols}
         pageSize={5}
         
       />

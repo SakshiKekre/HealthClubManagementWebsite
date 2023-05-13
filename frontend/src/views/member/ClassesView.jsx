@@ -16,7 +16,7 @@ const handleRenderCell = (params) => {
   lastRenderedCell = params.row;
 
   // render the custom button component
-  return <CustomButton value={[params.row.classId, params.row.className, params.row.capacity, params.row.alreadySignedup]} />;
+  return <CustomButton value={[params.row.classId, params.row.className, params.row.capacity, params.row.alreadySignedup, params.row.timeSlots, params.row.instructor, params.row.location]} />;
 };
 
 const columns = [
@@ -46,7 +46,9 @@ function CustomButton( {value} ) {
   const className = value[1];
   const capacity = value[2];  
   const alreadySignedup = value[3];
-
+  const timeSlot = value[4];  
+  const instructor = value[5];
+  const location = value[6];
 
   function handleClick() {
     const regNumber = localStorage.getItem('memberId');
@@ -54,7 +56,10 @@ function CustomButton( {value} ) {
     const payload = JSON.stringify({
       "className": className,
       "classId": classId,
-      "regNumber": regNumber
+      "regNumber": regNumber,
+      "timeSlot": timeSlot,
+      "instructor": instructor,
+      "location": location
     })
     console.log(payload);
 

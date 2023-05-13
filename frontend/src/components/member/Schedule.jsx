@@ -46,7 +46,7 @@ function Schedule() {
 
   useEffect(() => {
     // Fetch all the activities of member and set the state
-    let memberID = "4"; // localStorage.getItem('memberId');
+    let memberID = localStorage.getItem('memberId');
     const getActivityAPI = process.env.REACT_APP_API_URL + "/getAllScheduleForMember/" + memberID;
     console.log("getActivityAPI API:" + getActivityAPI);
     fetch(getActivityAPI)
@@ -60,7 +60,7 @@ function Schedule() {
           { field: "className", headerName: "Class", width: width },
           { field: "timeSlot", headerName: "Time", width: width },
           { field: "instructor", headerName: "Instructor", width: width },
-          { field: "membership", headerName: "Membership", width: width },
+          { field: "location", headerName: "Location", width: width },
         ]);
 
         // Assign rows
@@ -69,7 +69,7 @@ function Schedule() {
           className: item.className,
           timeSlot: item.timeSlot,
           instructor: item.instructor,
-          membership: item.membership
+          location: item.location
         })));
 
       })
@@ -84,8 +84,8 @@ function Schedule() {
     <div style={{ height: 400, width: '100%' }}>
       <div>
         <input type="text" placeholder="Search by class name" value={searchTerm} onChange={handleSearchTermChange} />
-        <Button onClick={handleSearch}>Search</Button>
-        <Button onClick={handleClear}>Clear</Button>
+        <button onClick={handleSearch}>Search</button>
+        <button onClick={handleClear}>Clear</button>
       </div>
       <div style={{ height: 400, width: '100%' }}>
         <DataGrid rows={searchResults}

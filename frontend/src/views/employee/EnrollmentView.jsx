@@ -28,7 +28,7 @@ class EnrollmentView extends Component {
       enrolled: false,
     };
 
-    fetch(process.env.REACT_APP_API_URL +'/healthclub/doRegister', {
+    fetch(process.env.REACT_APP_API_URL +'/doRegister', {
     method: 'POST',
    headers: {
       'Content-Type': 'application/json'
@@ -38,9 +38,14 @@ class EnrollmentView extends Component {
   .then(response => response.json())
   .then(data => {
     console.log(data);
-    if (data.status === "success") {
-      this.setState({ success: true }); // Update success state
-    }
+    // if (data.status === "success") {
+    //   console.log("in success")
+    //   this.setState({ success: true }); // Update success state
+    //   alert("Member Enrolled successfully for " + data.email);
+    // }
+    // console.log("out success")
+    this.setState({ success: true }); // Update success state
+
   })
   .catch(error => console.error(error));
   

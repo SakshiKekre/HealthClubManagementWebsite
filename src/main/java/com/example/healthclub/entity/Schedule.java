@@ -27,5 +27,6 @@ public class Schedule {
     private String instructor;
     @Getter@Setter
     private String membership;
-
+    @Getter@Setter
+    private String location;
 }
