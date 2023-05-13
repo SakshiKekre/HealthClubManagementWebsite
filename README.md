@@ -65,13 +65,18 @@ Communication: To make sure that everyone was aware of the project's requirement
 
 Courage: From the first meeting, a space was created to allow for open conversations. We utilized the resources and abilities that we all possessed to the fullest extent while also continuously developing each of our skill sets. We spoke extensively about technology and architecture. While discussing the best approach, we spent time strengthening our understanding. We developed a bond where, each person was free to propose the finest ideas that would be useful.
 
+## Links
+[Link to your team's GitHub Repo](https://github.com/orgs/gopinathsjsu/repositories#:~:text=New%20repository-,team%2Dproject%2Dlogic%2Dlegion,-Private)
+Link to your team's Project Journal
+[Link to your team's Google Sprint Task Sheet](https://docs.google.com/spreadsheets/d/1Zfyc6sH8DOkpihwRDR8lI0Yy3aAtoVIyzdvgTdSw42M/edit?usp=sharing)
+
 ## Documentation
 
 1. Usecase Diagram:
-![useCAse](https://github.com/gopinathsjsu/team-project-logic-legion/assets/112213523/7bcc1c62-bb18-435c-bb18-f65a91d18b89)
+![WhatsApp Image 2023-05-12 at 11 05 37 PM](https://github.com/gopinathsjsu/team-project-logic-legion/assets/112213523/741c8338-bd59-414f-ac9f-48e0cf68c2fa)
 
 2. Architecture Diagram:
-![archi](https://github.com/gopinathsjsu/team-project-logic-legion/assets/112213523/a36b2789-378a-48f7-949d-e6fe9bef8fb3)
+![WhatsApp Image 2023-05-12 at 10 55 33 PM](https://github.com/gopinathsjsu/team-project-logic-legion/assets/112213523/0d348f80-604c-4cc5-8ef1-ff07cdf5a122)
 
 3. Database Diagram:
 ![202_DB_model drawio](https://github.com/gopinathsjsu/team-project-logic-legion/assets/112213523/293ffa02-4770-4ba1-b63b-fdf18d682258)
