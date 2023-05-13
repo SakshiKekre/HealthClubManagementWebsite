@@ -63,9 +63,13 @@ Displays admin login upon clicking admin login button.
 - Admin can also check the user analytics.
 
 ## XP Core Values Maintained
+
+Simplicity: As a team we strived to keep the design and implementation of the software as simple as possible. This is achieved by avoiding unnecessary complexity, using straightforward and easy-to-understand code, and focusing on delivering the most important features first.
+
 Communication: To make sure that everyone was aware of the project's requirements, deadlines, and progress, communication was essential throughout. Calls, group chat, and scrums thrice a week(Monday, wednesday and Friday) were how we kept in touch and engaged with one another. Each member of the team made a conscious effort to communicate and keep tabs on the situation.
 
 Courage: From the first meeting, a space was created to allow for open conversations. We utilized the resources and abilities that we all possessed to the fullest extent while also continuously developing each of our skill sets. We spoke extensively about technology and architecture. While discussing the best approach, we spent time strengthening our understanding. We developed a bond where, each person was free to propose the finest ideas that would be useful.
+
 
 ## Links
 - [Link to your team's GitHub Repo](https://github.com/orgs/gopinathsjsu/repositories#:~:text=New%20repository-,team%2Dproject%2Dlogic%2Dlegion,-Private)
