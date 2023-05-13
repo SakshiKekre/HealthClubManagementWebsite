@@ -4,7 +4,7 @@
 1. Naga Bathula
 2. Ujwala Mote(016711396)
 3. Sakshi Kekre
-4. Chinmayi Sunku
+4. Chinmayi Sunku(011672851)
 
 ## Steps to run the application
 1. Clone the repo
