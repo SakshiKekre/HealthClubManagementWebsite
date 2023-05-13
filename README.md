@@ -67,7 +67,7 @@ Courage: From the first meeting, a space was created to allow for open conversat
 
 ## Links
 - [Link to your team's GitHub Repo](https://github.com/orgs/gopinathsjsu/repositories#:~:text=New%20repository-,team%2Dproject%2Dlogic%2Dlegion,-Private)
-- Link to your team's Project Journal
+- [Link to your team's Project Journal](https://github.com/gopinathsjsu/team-project-logic-legion/edit/main/README.md#:~:text=frontend-,journals,-src)
 - [Link to your team's Google Sprint Task Sheet](https://docs.google.com/spreadsheets/d/1Zfyc6sH8DOkpihwRDR8lI0Yy3aAtoVIyzdvgTdSw42M/edit?usp=sharing)
 
 ## Documentation
@@ -81,6 +81,10 @@ Courage: From the first meeting, a space was created to allow for open conversat
 3. Database Diagram:
 
 ![202_DB_model drawio](https://github.com/gopinathsjsu/team-project-logic-legion/assets/112213523/293ffa02-4770-4ba1-b63b-fdf18d682258)
+
+4. Component Diagram:
+![WhatsApp Image 2023-05-13 at 2 25 43 AM](https://github.com/gopinathsjsu/team-project-logic-legion/assets/112213523/3c7ca5c4-ec93-49f8-8082-beb5ce0febcd)
+
 
 ## AWS Deployment Resources
 
