@@ -45,6 +45,7 @@ npm start
 ### Users for our application
 Employee
 Members
+Non - members
 
 ### Homepage
 Displays the homepage with options to either login as user or admin, or just view the classes as non user.
