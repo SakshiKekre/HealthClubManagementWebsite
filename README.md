@@ -79,5 +79,6 @@ Courage: From the first meeting, a space was created to allow for open conversat
 ![WhatsApp Image 2023-05-12 at 10 55 33 PM](https://github.com/gopinathsjsu/team-project-logic-legion/assets/112213523/0d348f80-604c-4cc5-8ef1-ff07cdf5a122)
 
 3. Database Diagram:
+
 ![202_DB_model drawio](https://github.com/gopinathsjsu/team-project-logic-legion/assets/112213523/293ffa02-4770-4ba1-b63b-fdf18d682258)
 
