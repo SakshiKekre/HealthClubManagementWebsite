@@ -155,16 +155,16 @@ const formatDate = (dateString) => {
     .then((data) => {
       console.log(data);
       
-      setSearchResults(data);
+      //setSearchResults(data);
       // const rowsWithCheckinStatus = data.map((row, index) => ({ id: index + 1, ...row, checkedIn: row.enrolled  }))
-      // const rows = data.map((row, index) => ({
-      //   id: index + 1,
-      //   ...row,
-      //   checkedIn: row.enrolled,
-      //   locationname: row.location?.locationName || null,
-      //   membershipStartDate: formatDate(row.membershipStartDate),
-      // }));
-      // setSearchResults(rowsWithCheckinStatus);
+       const rows = data.map((row, index) => ({
+         id: index + 1,
+         ...row,
+         checkedIn: row.enrolled,
+         locationname: row.location?.locationName || null,
+         membershipStartDate: formatDate(row.membershipStartDate),
+       }));
+       setSearchResults(rows);
     })
     .catch(error => console.error(error));
   },[])
