@@ -57,3 +57,10 @@ Track his activities
 Admin can add a new class, add user, check-in and check-out the users.
 Admin can also check the user analytics.
 
+## XP Core Values Maintained
+Communication: To make sure that everyone was aware of the project's requirements, deadlines, and progress, communication was essential throughout. Calls, group chat, and scrums thrice a week(Monday, wednesday and Friday) were how we kept in touch and engaged with one another. Each member of the team made a conscious effort to communicate and keep tabs on the situation.
+
+Courage: From the first meeting, a space was created to allow for open conversations. We utilized the resources and abilities that we all possessed to the fullest extent while also continuously developing each of our skill sets. We spoke extensively about technology and architecture. While discussing the best approach, we spent time strengthening our understanding. We developed a bond where, each person was free to propose the finest ideas that would be useful.
+
+## Documentation
+
