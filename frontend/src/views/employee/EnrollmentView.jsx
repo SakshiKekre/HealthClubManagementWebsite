@@ -23,7 +23,7 @@ class EnrollmentView extends Component {
       },
       membership: {
         membershipType: values.membershipType,
-        validity: "90"
+	validity: values.membershipType === 'trial' ? "5" : "90",
       },
       enrolled: false,
     };
