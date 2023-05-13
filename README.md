@@ -94,4 +94,4 @@ Courage: From the first meeting, a space was created to allow for open conversat
 ![](/Users/shaileshyedge/Downloads/WhatsApp Image 2023-05-12 at 11.32.29 PM.jpeg)
 
 4. Route53
-![](/Users/shaileshyedge/Downloads/WhatsApp Image 2023-05-12 at 11.31.34 PM.jpeg)
+![img.png](img.png)
