@@ -23,7 +23,7 @@ npm start
 
 ### Note: 
 - Make changes to these files before running the project
-.env : add the backend Endpoint - (http://localhost:8080/healthclub)
+[.env](https://github.com/gopinathsjsu/team-project-logic-legion/tree/main/frontend#:~:text=2%20days%20ago-,.env,-(File)) : add the backend Endpoint - (http://localhost:8080/healthclub)
 - application.properties : add mongodb uri and database name
 
 ## Summary of the Contributions
