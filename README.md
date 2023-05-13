@@ -35,6 +35,8 @@ npm start
 ## Tech Stack
 - REACT
 - NODEJS
+- Java
+- Springboot
 - MongoDB - atlas
 - AWS
 
