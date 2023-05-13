@@ -41,7 +41,7 @@ function handleLogout() {
       <CDBSidebar textColor="#fff" backgroundColor="#333">
         <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
           <a href="/" className="text-decoration-none" style={{ color: 'inherit' }}>
-            You loggedin as {userName}
+            {userRole} View
           </a>
         </CDBSidebarHeader>
         {userRole === 'employee' && (
@@ -72,14 +72,14 @@ function handleLogout() {
           <NavLink exact to="/member/myprofile" activeClassName="activeClicked">
             <CDBSidebarMenuItem icon="columns">My Profile</CDBSidebarMenuItem>
           </NavLink>
-          <NavLink exact to="/member/schedule" activeClassName="activeClicked">
-            <CDBSidebarMenuItem icon="columns">My Schedule</CDBSidebarMenuItem>
-          </NavLink>
           <NavLink exact to="/member/classesView" activeClassName="activeClicked">
             <CDBSidebarMenuItem icon="table">Class Signup </CDBSidebarMenuItem>
           </NavLink>
           <NavLink exact to="/member/activities" activeClassName="activeClicked">
             <CDBSidebarMenuItem icon="user">My Activities</CDBSidebarMenuItem>
+          </NavLink>
+          <NavLink exact to="/member/schedule" activeClassName="activeClicked">
+            <CDBSidebarMenuItem icon="columns">My Schedule</CDBSidebarMenuItem>
           </NavLink>
           <NavLink exact onClick={handleLogout} activeClassName="activeClicked">
             <CDBSidebarMenuItem icon="exclamation-circle">Logout</CDBSidebarMenuItem>
