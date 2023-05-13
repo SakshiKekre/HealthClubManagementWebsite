@@ -1,7 +1,7 @@
 # team-project-logic-legion
 
 ## Team Members
-1. Naga Bathula
+1. Naga Bathula (016734484)
 2. Ujwala Mote(016711396)
 3. Sakshi Kekre
 4. Chinmayi Sunku(011672851)
