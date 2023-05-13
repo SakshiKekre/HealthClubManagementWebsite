@@ -53,12 +53,14 @@ Displays user login page upon clicking user login button.
 Displays admin login upon clicking admin login button.
 
 ### User login
-User can enroll in a class
-Track his activities
+- User can Search and Enroll in a class
+- Add and Track his activities
+- See Class Schedule
+- View Profile Details
 
 ### Admin login
-Admin can add a new class, add user, check-in and check-out the users.
-Admin can also check the user analytics.
+- Admin can add add user, check-in and check-out the users.
+- Admin can also check the user analytics.
 
 ## XP Core Values Maintained
 Communication: To make sure that everyone was aware of the project's requirements, deadlines, and progress, communication was essential throughout. Calls, group chat, and scrums thrice a week(Monday, wednesday and Friday) were how we kept in touch and engaged with one another. Each member of the team made a conscious effort to communicate and keep tabs on the situation.
