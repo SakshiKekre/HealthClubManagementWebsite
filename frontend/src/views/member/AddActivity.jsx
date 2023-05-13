@@ -23,7 +23,7 @@ function AddActivityView()  {
     console.log(JSON.stringify(requestBody));
     console.log('INSIDE SIBUMIT');
   
-    const url = 'http://localhost:8080/healthclub/addActivity';
+    const url =  process.env.REACT_APP_API_URL +'/addActivity';
     //const userType = 'employee';
 
     fetch(url, {

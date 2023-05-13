@@ -5,7 +5,7 @@ function GymClassSchedule() {
   const [locations, setLocations] = useState([]);
   const [schedule, setSchedule] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState("");
-  const [selectedLocationId, setSelectedLocatioId] = useState("");
+  const [selectedLocationId, setSelectedLocatioId] = useState("640bb00c57241540e9c129d7");
 
   const handleLocationDropdownChange = (locationName,locationID) => {
     console.log('inside handleLocationDropdownChange');
