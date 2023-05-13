@@ -76,7 +76,7 @@ Courage: From the first meeting, a space was created to allow for open conversat
 - [Link to your team's Project Journal](https://github.com/gopinathsjsu/team-project-logic-legion/tree/d804512a8261d2e2661111258ba10ffa78082299/journals)
 - [Link to your team's Google Sprint Task Sheet](https://docs.google.com/spreadsheets/d/1Zfyc6sH8DOkpihwRDR8lI0Yy3aAtoVIyzdvgTdSw42M/edit?usp=sharing)
 - [Demo URL](http://llhealthclub.placeholders.online/)
-- [Wireframe mockups](https://github.com/gopinathsjsu/team-project-logic-legion/edit/main/README.md#:~:text=Chinmayi-,LL_Healthclub_Mockups,-.pdf)
+- [Wireframe mockups](https://github.com/gopinathsjsu/team-project-logic-legion/blob/d804512a8261d2e2661111258ba10ffa78082299/journals/LL_Healthclub_Mockups.pdf)
 
 ## Documentation
 
@@ -93,7 +93,6 @@ Courage: From the first meeting, a space was created to allow for open conversat
 4. Component Diagram:
 ![WhatsApp Image 2023-05-13 at 2 25 43 AM](https://github.com/gopinathsjsu/team-project-logic-legion/assets/112213523/3c7ca5c4-ec93-49f8-8082-beb5ce0febcd)
 
-5.UI Mockups: [Click Here](https://github.com/gopinathsjsu/team-project-logic-legion/blob/d804512a8261d2e2661111258ba10ffa78082299/journals/LL_Healthclub_Mockups.pdf)
 
 
 ## AWS Deployment Resources
