@@ -66,9 +66,9 @@ Communication: To make sure that everyone was aware of the project's requirement
 Courage: From the first meeting, a space was created to allow for open conversations. We utilized the resources and abilities that we all possessed to the fullest extent while also continuously developing each of our skill sets. We spoke extensively about technology and architecture. While discussing the best approach, we spent time strengthening our understanding. We developed a bond where, each person was free to propose the finest ideas that would be useful.
 
 ## Links
-[Link to your team's GitHub Repo](https://github.com/orgs/gopinathsjsu/repositories#:~:text=New%20repository-,team%2Dproject%2Dlogic%2Dlegion,-Private)
-Link to your team's Project Journal
-[Link to your team's Google Sprint Task Sheet](https://docs.google.com/spreadsheets/d/1Zfyc6sH8DOkpihwRDR8lI0Yy3aAtoVIyzdvgTdSw42M/edit?usp=sharing)
+- [Link to your team's GitHub Repo](https://github.com/orgs/gopinathsjsu/repositories#:~:text=New%20repository-,team%2Dproject%2Dlogic%2Dlegion,-Private)
+- Link to your team's Project Journal
+- [Link to your team's Google Sprint Task Sheet](https://docs.google.com/spreadsheets/d/1Zfyc6sH8DOkpihwRDR8lI0Yy3aAtoVIyzdvgTdSw42M/edit?usp=sharing)
 
 ## Documentation
 
