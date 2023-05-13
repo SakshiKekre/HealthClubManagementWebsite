@@ -67,7 +67,7 @@ Courage: From the first meeting, a space was created to allow for open conversat
 
 ## Links
 - [Link to your team's GitHub Repo](https://github.com/orgs/gopinathsjsu/repositories#:~:text=New%20repository-,team%2Dproject%2Dlogic%2Dlegion,-Private)
-- [Link to your team's Project Journal] (https://github.com/gopinathsjsu/team-project-logic-legion/tree/d804512a8261d2e2661111258ba10ffa78082299/journals)
+- [Link to your team's Project Journal](https://github.com/gopinathsjsu/team-project-logic-legion/tree/d804512a8261d2e2661111258ba10ffa78082299/journals)
 - [Link to your team's Google Sprint Task Sheet](https://docs.google.com/spreadsheets/d/1Zfyc6sH8DOkpihwRDR8lI0Yy3aAtoVIyzdvgTdSw42M/edit?usp=sharing)
 
 ## Documentation
