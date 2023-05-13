@@ -85,13 +85,13 @@ Courage: From the first meeting, a space was created to allow for open conversat
 ## AWS Deployment Resources
 
 1. EC2
-![](/Users/shaileshyedge/Downloads/WhatsApp Image 2023-05-12 at 11.34.35 PM.jpeg)
+![WhatsApp Image 2023-05-12 at 11 34 33 PM](https://github.com/gopinathsjsu/team-project-logic-legion/assets/112213523/9830020e-6c7d-4e08-ac45-61e1f043b4ab)
 
 2. Autoscaling
-![](/Users/shaileshyedge/Downloads/WhatsApp Image 2023-05-12 at 11.35.18 PM.jpeg)
+![WhatsApp Image 2023-05-12 at 11 35 15 PM](https://github.com/gopinathsjsu/team-project-logic-legion/assets/112213523/71d8a1ac-2966-4108-9aaf-bafcde4f2761)
 
 3. ELB
-![](/Users/shaileshyedge/Downloads/WhatsApp Image 2023-05-12 at 11.32.29 PM.jpeg)
+![WhatsApp Image 2023-05-12 at 11 32 28 PM](https://github.com/gopinathsjsu/team-project-logic-legion/assets/112213523/29ff7585-15ad-4f55-8128-711768a30f70)
 
 4. Route53
-![img.png](img.png)
+![WhatsApp Image 2023-05-12 at 11 31 32 PM](https://github.com/gopinathsjsu/team-project-logic-legion/assets/112213523/f634ecf9-6f79-4d1a-82ed-d55c5e309a60)
