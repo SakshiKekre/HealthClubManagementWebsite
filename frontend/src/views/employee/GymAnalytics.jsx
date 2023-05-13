@@ -7,10 +7,10 @@ const LeftNavigation = lazy(() => import("../../components/LeftNavigation"));
 
 
 const userActivityData_1 = [
-  { x: "San Jose", y: 200 },
-  { x: "Fremont", y: 300 },
-  { x: "San Francisco", y: 150 },
-  { x: "Dublin", y: 100 },
+  { x: "Newark", y: 100 },
+  { x: "Fremont", y: 150 },
+  { x: "San Jose", y: 250},
+  { x: "San Francisco", y: 300 },
 ];
 
 const classesData_1 = [
