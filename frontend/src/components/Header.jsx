@@ -6,6 +6,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 
 const Header = () => {
+
+  const loggedIn = localStorage.getItem('isLoggedIn');
+
   return (
     <React.Fragment>
       <header className="p-3 border-bottom bg-dark">
@@ -26,7 +29,7 @@ const Header = () => {
                   </div>
                 </Link>
               </div> */}
-              <div className="btn-group">
+              {/* <div className="btn-group">
                 <button
                   type="button"
                   className="btn btn-secondary rounded-circle border me-3"
@@ -52,9 +55,10 @@ const Header = () => {
                     </Link>
                   </li>
                 </ul>
-              </div>
+              </div> */}
+              {loggedIn != 'true' ? <Link to="/account/signin">Sign In</Link>  : '' } {" "}
 
-              <Link to="/account/signin">Sign In</Link> {" "}
+              
             </div>
           </div>
         </div>
