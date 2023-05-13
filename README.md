@@ -82,3 +82,16 @@ Courage: From the first meeting, a space was created to allow for open conversat
 
 ![202_DB_model drawio](https://github.com/gopinathsjsu/team-project-logic-legion/assets/112213523/293ffa02-4770-4ba1-b63b-fdf18d682258)
 
+## AWS Deployment Resources
+
+1. EC2
+![](/Users/shaileshyedge/Downloads/WhatsApp Image 2023-05-12 at 11.34.35 PM.jpeg)
+
+2. Autoscaling
+![](/Users/shaileshyedge/Downloads/WhatsApp Image 2023-05-12 at 11.35.18 PM.jpeg)
+
+3. ELB
+![](/Users/shaileshyedge/Downloads/WhatsApp Image 2023-05-12 at 11.32.29 PM.jpeg)
+
+4. Route53
+![](/Users/shaileshyedge/Downloads/WhatsApp Image 2023-05-12 at 11.31.34 PM.jpeg)
