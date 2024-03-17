@@ -1,36 +1,8 @@
-# team-project-logic-legion
-
-# [Link to our demo](https://drive.google.com/file/d/1er0_wQC_L3MS4jU-9mlflgHI245M6u02/view?usp=share_link)
-
-## Team Members
-1. Naga Bathula(016734484)
-2. Ujwala Mote(016711396)
-3. Sakshi Kekre(015970500)
-4. Chinmayi Sunku(011672851)
-
-## Steps to run the application
-1. Clone the repo
-```
-git clone https://github.com/gopinathsjsu/team-project-logic-legion.git
-```
-2. Go to the [frontend directory](https://github.com/gopinathsjsu/team-project-logic-legion/new/main?readme=1#:~:text=.mvn-,frontend,-src) and install node modules
-```
-npm install
-```
-3. To run the client
-```
-npm start
-```
-4. Navigate to [HealthClubApplication.java](https://github.com/gopinathsjsu/team-project-logic-legion/new/main?readme=1#:~:text=HealthClubApplication) and run the spring boot applicaiton 
-
-### Note: 
-- Make changes to these files before running the project
-[.env](https://github.com/gopinathsjsu/team-project-logic-legion/blob/main/frontend/.env) : add the backend Endpoint - (http://localhost:8080/healthclub)
-- [application.properties](https://github.com/gopinathsjsu/team-project-logic-legion/blob/main/src/main/resources/application.properties) : add mongodb uri and database name
+# This project is a part of coursework for Software Systems Engineering
 
 ## Summary of the Contributions
-1. Naga (Scrum Master) - WireFrames, architecture, frontend
-2. Sakshi - UML class diagrams, architecture, frontend
+1. Sakshi - UML class diagrams, architecture, frontend
+2. Naga - WireFrames, architecture, frontend
 3. Ujwala - Database connectivity and design, architecture, backend
 4. Chinmayi - Database design, architecture backend, AWS deployment
 
